@@ -10,7 +10,7 @@ function submit() {
 function Signin() {
   return (
     <>
-      <section className="bg-gray-50 dark:bg-gray-900 bg-cover">
+      <section className="bg-gray-50 dark:bg-gray-900 bg-auto">
         <Header></Header>
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
           <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
@@ -21,7 +21,7 @@ function Signin() {
               <form className="space-y-4 md:space-y-6" action="#" method="POST">
                 <div>
                   <label
-                    htmlFor="email"
+                    htmlFor="username"
                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                   >
                     Username

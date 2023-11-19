@@ -5,7 +5,7 @@ import SidebarLecturer from "./components/Sidebar-Lecturer";
 import SidebarStudent from "./components/Sidebar-Studenet";
 
 function App() {
-  return <SidebarHod />;
+  return <Signin />;
 }
 
 export default App;
