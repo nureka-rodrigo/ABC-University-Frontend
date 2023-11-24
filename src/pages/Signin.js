@@ -1,13 +1,52 @@
-import React from "react";
+import React, {useState} from "react";
 import "../assests/css/signin.css";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-
-function submit() {
-  alert("Submit");
-}
+import {Label, TextInput} from "flowbite-react";
 
 function Signin() {
+
+  const [usernameError, setUsernameError] = useState(null);
+  const [passwordError, setPasswordError] = useState(null);
+
+  function validateUsername(e) {
+    const data = e.target.value;
+
+    if(data === ""){
+      setUsernameError("Username can not be empty!");
+    } else{
+      setUsernameError(null);
+    }
+  }
+
+  function validatePassword(e) {
+    const data = e.target.value;
+
+    if(data === ""){
+      setPasswordError("Password can not be empty!");
+    } else{
+      setPasswordError(null);
+    }
+  }
+
+  function submitForm(e) {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.target).entries());
+
+    if(data.username === "" && data.password === ""){
+      setUsernameError("Username can not be empty!");
+      setPasswordError("Password can not be empty!");
+    } else if(data.username === ""){
+      setUsernameError("Username can not be empty!");
+    } else if(data.password === ""){
+      setPasswordError("Password can not be empty!");
+    } else{
+      setUsernameError(null);
+      setPasswordError(null);
+      alert("OK");
+    }
+  }
+
   return (
     <>
       <section className="bg-gray-100 dark:bg-gray-900 bg-auto">
@@ -18,43 +57,40 @@ function Signin() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-center text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" action="#" method="POST">
+              <form className="space-y-4 md:space-y-6" onSubmit={(e) => submitForm(e)}>
                 <div>
-                  <label
-                    htmlFor="username"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    name="username"
-                    id="username"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="admin"
-                    required=""
+                  <div className="mb-2 block">
+                    <Label htmlFor="username" value="Username" />
+                  </div>
+                  <TextInput
+                      type="text"
+                      id="username"
+                      placeholder="admin"
+                      name="username"
+                      helperText={
+                        <span className="text-red-500">{usernameError}</span>
+                      }
+                      onChange={(e)=>validateUsername(e)}
                   />
                 </div>
                 <div>
-                  <label
-                    htmlFor="password"
-                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    id="password"
-                    placeholder="••••••••"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required=""
+                  <div className="mb-2 block">
+                    <Label htmlFor="password" value="Password" />
+                  </div>
+                  <TextInput
+                      type="password"
+                      id="password"
+                      placeholder="••••••••"
+                      name="password"
+                      helperText={
+                        <span className="text-red-500">{passwordError}</span>
+                      }
+                      onChange={(e)=>validatePassword(e)}
                   />
                 </div>
                 <button
                   type="submit"
                   className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                  onClick={submit}
                 >
                   Sign in
                 </button>
