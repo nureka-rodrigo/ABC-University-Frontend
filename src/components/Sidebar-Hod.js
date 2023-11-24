@@ -1,5 +1,4 @@
 import "flowbite";
-import { RiAppsFill } from "react-icons/ri";
 
 export default function SidebarHod() {
   return (

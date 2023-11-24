@@ -1,10 +1,11 @@
 import React from "react";
+import "flowbite";
 import Signin from "./pages/Signin";
 import SidebarHod from "./components/Sidebar-Hod";
-import SidebarLecturer from "./components/Sidebar-Lecturer";
-import SidebarStudent from "./components/Sidebar-Studenet";
+import ThemeSwitcher from "./function/ThemeSwitcher";
 
 function App() {
+  ThemeSwitcher();
   return <Signin />;
 }
 
