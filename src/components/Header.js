@@ -1,4 +1,5 @@
 import ThemeToggler from "./Theme-Toggler";
+import {Link} from "react-router-dom";
 
 export default function Header() {
   return (
@@ -6,7 +7,7 @@ export default function Header() {
       <header>
         <nav className="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-            <a href="#" className="flex items-center">
+            <Link to="/" className="flex items-center">
               <img
                 src="https://flowbite.com/docs/images/logo.svg"
                 className="mr-3 h-6 sm:h-9"
@@ -15,7 +16,7 @@ export default function Header() {
               <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                 ABC University
               </span>
-            </a>
+            </Link>
             <div className="flex items-center lg:order-2">
               <ThemeToggler></ThemeToggler>
             </div>

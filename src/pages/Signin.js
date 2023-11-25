@@ -43,7 +43,8 @@ function Signin() {
     } else{
       setUsernameError(null);
       setPasswordError(null);
-      alert("OK");
+      console.log(data);
+      window.location.href="/dashboard";
     }
   }
 
@@ -57,7 +58,7 @@ function Signin() {
               <h1 className="text-xl font-bold leading-tight tracking-tight text-center text-gray-900 md:text-2xl dark:text-white">
                 Sign in to your account
               </h1>
-              <form className="space-y-4 md:space-y-6" onSubmit={(e) => submitForm(e)}>
+              <form className="space-y-4 md:space-y-6" action={"/test"} onSubmit={(e) => submitForm(e)}>
                 <div>
                   <div className="mb-2 block">
                     <Label htmlFor="username" value="Username" />
