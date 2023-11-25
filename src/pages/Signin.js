@@ -65,7 +65,7 @@ function Signin() {
                   <TextInput
                       type="text"
                       id="username"
-                      placeholder="admin"
+                      placeholder="cst20069"
                       name="username"
                       helperText={
                         <span className="text-red-500">{usernameError}</span>
