@@ -6,10 +6,11 @@ import {Link} from "react-router-dom";
 import ThemeToggler from "./Theme-Toggler";
 
 export default function SidebarStudent() {
-  
+
   function signout() {
     window.location.href="/";
   }
+
   return (
       <>
         <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">

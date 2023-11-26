@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import {Label, TextInput} from "flowbite-react";
 
-function Signin() {
+export default function Signin() {
 
   const [usernameError, setUsernameError] = useState(null);
   const [passwordError, setPasswordError] = useState(null);
@@ -104,5 +104,3 @@ function Signin() {
     </>
   );
 }
-
-export default Signin;

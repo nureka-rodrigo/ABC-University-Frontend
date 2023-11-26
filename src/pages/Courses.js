@@ -1,4 +1,7 @@
-export default function Courses
-    () {
+export default function Courses() {
+    return(
+        <>
 
+        </>
+    );
 }
