@@ -147,7 +147,7 @@ export default function Profile() {
                                     htmlFor="faculty"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
-                                    Email
+                                    Faculty
                                 </label>
                                 <TextInput
                                     type="text"
@@ -205,7 +205,7 @@ export default function Profile() {
                                     name="bio"
                                     rows="8"
                                     placeholder="Write a biography here..."
-                                    defaultValue="I am passionate about exploring the vast world of technology and its applications. With a strong foundation in computer networks, programming, algorithms, and problem-solving, I am eager to contribute my skills and learn from experiencedprofessionals in the field."
+                                    defaultValue="I am passionate about exploring the vast world of technology and its applications. With a strong foundation in computer networks, programming, algorithms, and problem-solving, I am eager to contribute my skills and learn from experienced professionals in the field."
                                     readOnly
                                 />
                             </div>
@@ -227,18 +227,6 @@ export default function Profile() {
                                 data-drawer-show="password-update"
                                 aria-controls="password-update"
                             >
-                                <svg
-                                    className="mr-1 -ml-1 w-5 h-5"
-                                    fill="currentColor"
-                                    viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                >
-                                    <path
-                                        fillRule="evenodd"
-                                        d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                        clipRule="evenodd"
-                                    ></path>
-                                </svg>
                                 Change Password
                             </button>
                         </div>
@@ -267,11 +255,10 @@ export default function Profile() {
                                 >
                                     First Name
                                 </label>
-                                <input
+                                <TextInput
                                     type="text"
                                     name="fnameUpdate"
                                     id="fnameUpdate"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     defaultValue="Nureka"
                                     placeholder="Nureka"
                                     required=""
@@ -284,11 +271,10 @@ export default function Profile() {
                                 >
                                     Last Name
                                 </label>
-                                <input
+                                <TextInput
                                     type="text"
                                     name="lnameUpdate"
                                     id="lnameUpdate"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     defaultValue="Rodrigo"
                                     placeholder="Rodrigo"
                                     required=""
@@ -301,11 +287,10 @@ export default function Profile() {
                                 >
                                     Mobile No.
                                 </label>
-                                <input
+                                <TextInput
                                     type="number"
                                     name="telUpdate"
                                     id="telUpdate"
-                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                     defaultValue="0767579998"
                                     placeholder="0767579998"
                                     required=""
@@ -322,7 +307,7 @@ export default function Profile() {
                                     id="bioUpdate"
                                     name="bioUpdate"
                                     rows="8"
-                                    defaultValue="I am passionate about exploring the vast world of technology and its applications. With a strong foundation in computer networks, programming, algorithms, and problem-solving, I am eager to contribute my skills and learn from experiencedprofessionals in the field."
+                                    defaultValue="I am passionate about exploring the vast world of technology and its applications. With a strong foundation in computer networks, programming, algorithms, and problem-solving, I am eager to contribute my skills and learn from experienced professionals in the field."
                                     placeholder="Write a biography here..."
                                 >
                                 </Textarea>
@@ -354,7 +339,7 @@ export default function Profile() {
                                         clipRule="evenodd"
                                     ></path>
                                 </svg>
-                                Delete
+                                Cancel
                             </button>
                         </div>
                     </form>
@@ -459,7 +444,7 @@ export default function Profile() {
                                         clipRule="evenodd"
                                     ></path>
                                 </svg>
-                                Delete
+                                Cancel
                             </button>
                         </div>
                     </form>
