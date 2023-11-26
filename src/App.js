@@ -7,6 +7,7 @@ import Result from "./pages/Result";
 import Feedback from "./pages/Feedback";
 import ErrorPage from "./pages/404";
 import Signin from "./pages/Signin";
+import Test from "./pages/test";
 
 export default function App() {
     return (
@@ -18,6 +19,7 @@ export default function App() {
               <Route path={"/courses"} element={<Courses/>}/>
               <Route path={"/result"} element={<Result/>}/>
               <Route path={"/feedback"} element={<Feedback/>}/>
+              <Route path={"/test"} element={<Test/>}/>
               <Route path={"*"} element={<ErrorPage/>}/>
           </Routes>
       </>

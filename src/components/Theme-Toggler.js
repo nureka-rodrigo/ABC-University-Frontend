@@ -1,9 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { MdDarkMode, MdComputer, MdSunny } from "react-icons/md";
-import { Dropdown } from "flowbite-react";
-import ThemeSwitcher from "../function/ThemeSwitcher";
+import React, {useEffect, useState} from "react";
+import {MdComputer, MdDarkMode, MdSunny} from "react-icons/md";
+import {Dropdown} from "flowbite-react";
 
-const ThemeButton = () => {
+function ThemeSwitcher(){
+    if (
+        localStorage.theme === "dark" ||
+        (!("theme" in localStorage) &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+        document.documentElement.classList.add("dark");
+    } else {
+        document.documentElement.classList.remove("dark");
+    }
+}
+
+export default function ThemeButton() {
   // theme change function
 
   const themeIcons = {
@@ -60,5 +71,3 @@ const ThemeButton = () => {
       </div>
   );
 };
-
-export default ThemeButton;

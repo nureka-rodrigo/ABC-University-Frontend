@@ -1,5 +1,6 @@
 import ThemeToggler from "./Theme-Toggler";
 import {Link} from "react-router-dom";
+import Logo from "../logo.svg";
 
 export default function Header() {
   return (
@@ -9,7 +10,7 @@ export default function Header() {
           <div className="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
             <Link to="/" className="flex items-center">
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
+                src={Logo}
                 className="mr-3 h-6 sm:h-9"
                 alt="Flowbite Logo"
               />

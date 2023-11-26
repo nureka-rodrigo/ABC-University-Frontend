@@ -2,10 +2,15 @@ import "flowbite";
 import {HiMenuAlt2} from "react-icons/hi";
 import {FaBookmark, FaCommentAlt, FaHome, FaUser} from "react-icons/fa";
 import {BsGraphUp} from "react-icons/bs";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import ThemeToggler from "./Theme-Toggler";
+import Logo from "../logo.svg";
+import ImageStudent from "../assests/img/people/students/Nureka.jpg";
 
 export default function SidebarStudent() {
+
+  let pathArray = useLocation().pathname.split("/");
+  let lastPart = pathArray[pathArray.length - 1];
 
   function signout() {
     window.location.href="/";
@@ -33,7 +38,7 @@ export default function SidebarStudent() {
                 </button>
                 <Link to="/dashboard" className="flex ms-2 md:me-24">
                   <img
-                      src="https://flowbite.com/docs/images/logo.svg"
+                      src={Logo}
                       className="h-8 me-3"
                       alt="FlowBite Logo"
                   />
@@ -56,27 +61,19 @@ export default function SidebarStudent() {
         >
           <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
             <ul className="space-y-2 font-medium">
-              <li className="flex items-center pb-5 pl-7 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                  <div className="px-4" role="none">
-                    <p
-                        className="text-lg text-gray-900 dark:text-white"
-                        role="none"
-                    >
-                      Nureka Rodrigo
-                    </p>
-                    <p
-                        className="text-sm text-center font-medium text-gray-900 truncate dark:text-gray-300"
-                        role="none"
-                    >
-                      Student
-                    </p>
-                  </div>
+              <li className="flex items-center pt-3 pb-5 pl-10 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <div className="flex flex-col items-center">
+                  <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={ImageStudent}
+                       alt="student image"/>
+                  <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Nureka Rodrigo</h5>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">Student</span>
+                </div>
               </li>
               <hr/>
               <li className="py-1">
                 <Link
                     to="/dashboard"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${lastPart === "dashboard" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
                 >
                   <FaHome
                       className="w-6 h-6 text-gray-800 dark:text-white"
@@ -91,7 +88,7 @@ export default function SidebarStudent() {
               <li className="py-1">
                 <Link
                     to="/profile"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${lastPart === "profile" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
                 >
                   <FaUser
                       className="w-6 h-6 text-gray-800 dark:text-white"
@@ -106,7 +103,7 @@ export default function SidebarStudent() {
               <li className="py-1">
                 <Link
                     to="/courses"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${lastPart === "courses" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
                 >
                   <FaBookmark
                       className="w-6 h-6 text-gray-800 dark:text-white"
@@ -121,7 +118,7 @@ export default function SidebarStudent() {
               <li className="py-1">
                 <Link
                     to="/result"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${lastPart === "result" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
                 >
                   <BsGraphUp
                       className="w-6 h-6 text-gray-800 dark:text-white"
@@ -136,7 +133,7 @@ export default function SidebarStudent() {
               <li className="py-1">
                 <Link
                     to="/feedback"
-                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    className={`flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group ${lastPart === "feedback" ? "bg-gray-100 dark:bg-gray-700" : ""}`}
                 >
                   <FaCommentAlt
                       className="w-6 h-6 text-gray-800 dark:text-white"
