@@ -6,14 +6,14 @@ import Courses from "./pages/Courses";
 import Result from "./pages/Result";
 import Feedback from "./pages/Feedback";
 import ErrorPage from "./pages/404";
+import Signin from "./pages/Signin";
 import Test from "./pages/test";
-import AlertSuccess from "./pages/AlertSuccess";
 
 export default function App() {
     return (
       <>
           <Routes>
-              <Route path={"/"} element={<AlertSuccess/>}/>
+              <Route path={"/"} element={<Signin/>}/>
               <Route path={"/dashboard"} element={<Dashboard/>}/>
               <Route path={"/profile"} element={<Profile/>}/>
               <Route path={"/courses"} element={<Courses/>}/>
