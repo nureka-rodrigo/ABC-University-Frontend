@@ -7,6 +7,8 @@ export default function Profile() {
     const [currentPasswordError, setCurrentPasswordError] = useState(null);
     const [newPasswordError, setNewPasswordError] = useState(null);
     const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+    let newPassword = null;
+    let confirmPassword = null;
 
     function validateCurrentPassword(e) {
         const data = e.target.value;
@@ -23,8 +25,11 @@ export default function Profile() {
 
         if (data === "") {
             setNewPasswordError("This field must be filled out!");
+        } else if(data.length < 8){
+            setNewPasswordError("Password should contains 8 or more characters!");
         } else {
             setNewPasswordError(null);
+            newPassword = data;
         }
     }
 
@@ -35,27 +40,34 @@ export default function Profile() {
             setConfirmPasswordError("This field must be filled out!");
         } else {
             setConfirmPasswordError(null);
+            confirmPassword = data;
         }
     }
 
     function submitForm(e) {
-        e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
 
-        if (
-            data.currentPassword === "" &&
-            data.newPassword === "" &&
-            data.confirmPassword === ""
-        ) {
+        if (data.currentPassword === "" && data.newPassword === "" && data.confirmPassword === "") {
+            e.preventDefault();
             setCurrentPasswordError("This field must be filled out!");
             setNewPasswordError("This field must be filled out!");
             setConfirmPasswordError("This field must be filled out!");
         } else if (data.currentPassword === "") {
+            e.preventDefault();
             setCurrentPasswordError("This field must be filled out!");
         } else if (data.newPassword === "") {
+            e.preventDefault();
             setNewPasswordError("This field must be filled out!");
         } else if (data.confirmPassword === "") {
+            e.preventDefault();
             setConfirmPasswordError("This field must be filled out!");
+        } else if(data.newPassword.length < 8){
+            e.preventDefault();
+            setNewPasswordError("Password should contains 8 or more characters!");
+        } else if(data.newPassword !== data.confirmPassword){
+            e.preventDefault();
+            setNewPasswordError("Passwords does not match!");
+            setConfirmPasswordError("Passwords does not match!");
         } else {
             setCurrentPasswordError(null);
             setNewPasswordError(null);
@@ -130,12 +142,29 @@ export default function Profile() {
                                     htmlFor="degree"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
-                                    Email
+                                    Degree Programme
                                 </label>
                                 <TextInput
                                     type="text"
                                     name="degree"
                                     id="degree"
+                                    defaultValue="Computer Science & Technology"
+                                    placeholder="Computer Science & Technology"
+                                    required=""
+                                    readOnly
+                                />
+                            </div>
+                            <div className="sm:col-span-2">
+                                <label
+                                    htmlFor="department"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >
+                                    Department
+                                </label>
+                                <TextInput
+                                    type="text"
+                                    name="department"
+                                    id="department"
                                     defaultValue="Computer Science & Technology"
                                     placeholder="Computer Science & Technology"
                                     required=""
