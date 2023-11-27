@@ -7,8 +7,6 @@ export default function Profile() {
     const [currentPasswordError, setCurrentPasswordError] = useState(null);
     const [newPasswordError, setNewPasswordError] = useState(null);
     const [confirmPasswordError, setConfirmPasswordError] = useState(null);
-    let newPassword = null;
-    let confirmPassword = null;
 
     function validateCurrentPassword(e) {
         const data = e.target.value;
@@ -29,7 +27,6 @@ export default function Profile() {
             setNewPasswordError("Password should contains 8 or more characters!");
         } else {
             setNewPasswordError(null);
-            newPassword = data;
         }
     }
 
@@ -40,7 +37,6 @@ export default function Profile() {
             setConfirmPasswordError("This field must be filled out!");
         } else {
             setConfirmPasswordError(null);
-            confirmPassword = data;
         }
     }
 
