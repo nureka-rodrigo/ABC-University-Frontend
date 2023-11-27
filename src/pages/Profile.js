@@ -25,7 +25,7 @@ export default function Profile() {
 
         if (data === "") {
             setNewPasswordError("This field must be filled out!");
-        } else if(data.length < 8){
+        } else if (data.length < 8) {
             setNewPasswordError("Password should contains 8 or more characters!");
         } else {
             setNewPasswordError(null);
@@ -45,7 +45,11 @@ export default function Profile() {
     function submitFormChangePassword(e) {
         const data = Object.fromEntries(new FormData(e.target).entries());
 
-        if (data.currentPassword === "" && data.newPassword === "" && data.confirmPassword === "") {
+        if (
+            data.currentPassword === "" &&
+            data.newPassword === "" &&
+            data.confirmPassword === ""
+        ) {
             e.preventDefault();
             setCurrentPasswordError("This field must be filled out!");
             setNewPasswordError("This field must be filled out!");
@@ -59,10 +63,10 @@ export default function Profile() {
         } else if (data.confirmPassword === "") {
             e.preventDefault();
             setConfirmPasswordError("This field must be filled out!");
-        } else if(data.newPassword.length < 8){
+        } else if (data.newPassword.length < 8) {
             e.preventDefault();
             setNewPasswordError("Password should contains 8 or more characters!");
-        } else if(data.newPassword !== data.confirmPassword){
+        } else if (data.newPassword !== data.confirmPassword) {
             e.preventDefault();
             setNewPasswordError("Passwords does not match!");
             setConfirmPasswordError("Passwords does not match!");
@@ -79,12 +83,16 @@ export default function Profile() {
         const fileExtensionArray = file.name.split(".");
         const fileExtension = fileExtensionArray[fileExtensionArray.length - 1];
 
-        if (file.size > 2048000){
+        if (file.size > 2048000) {
             setFileError("MAX FILE size is 2MB!");
-        } else if(fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "svg"){
+        } else if (
+            fileExtension !== "png" &&
+            fileExtension !== "jpg" &&
+            fileExtension !== "svg"
+        ) {
             setFileError("Only SVG, JPG, JPEG and PNG are allowed!");
             console.log(fileExtension);
-        } else{
+        } else {
             setFileError(null);
             setSelectedFile(file);
         }
@@ -300,7 +308,7 @@ export default function Profile() {
                     >
                         Update Product
                     </h5>
-                    <form onSubmit={(e)=>submitFormProfilePassword(e)}>
+                    <form onSubmit={(e) => submitFormProfilePassword(e)}>
                         <div className="space-y-4">
                             <div>
                                 <div>
@@ -314,9 +322,13 @@ export default function Profile() {
                                 <FileInput
                                     id="file-upload"
                                     helperText={
-                                        fileError ? <span className="text-red-500">{fileError}</span> : <span>{"SVG, PNG or JPG. (MAX SIZE: 2MB)."}</span>
+                                        fileError ? (
+                                            <span className="text-red-500">{fileError}</span>
+                                        ) : (
+                                            <span>{"SVG, PNG or JPG. (MAX SIZE: 2MB)."}</span>
+                                        )
                                     }
-                                    onChange={(e)=>validateFile(e)}
+                                    onChange={(e) => validateFile(e)}
                                 />
                             </div>
                             <div className="w-full">
@@ -380,8 +392,7 @@ export default function Profile() {
                                     rows="8"
                                     defaultValue="I am passionate about exploring the vast world of technology and its applications. With a strong foundation in computer networks, programming, algorithms, and problem-solving, I am eager to contribute my skills and learn from experienced professionals in the field."
                                     placeholder="Write a biography here..."
-                                >
-                                </Textarea>
+                                ></Textarea>
                             </div>
                         </div>
                         <div className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
@@ -429,7 +440,7 @@ export default function Profile() {
                     >
                         Update Product
                     </h5>
-                    <form onSubmit={(e)=>submitFormChangePassword(e)}>
+                    <form onSubmit={(e) => submitFormChangePassword(e)}>
                         <div className="space-y-4">
                             <div className="w-full">
                                 <label
