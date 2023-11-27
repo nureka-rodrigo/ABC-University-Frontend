@@ -13,7 +13,7 @@ export default function Dashboard() {
                         <SemesterChart />
                     </Card>
                 </div>
-                <div className="p-5">
+                <div className="p-5 pt-0">
                     <Card className="max-w-screen max-h-screen">
                         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">
                             Overall GPA
