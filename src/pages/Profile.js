@@ -1,12 +1,14 @@
 import SidebarStudent from "../components/Sidebar-Student";
 import Footer from "../components/Footer";
 import React, {useState} from "react";
-import {Textarea, TextInput} from "flowbite-react";
+import {FileInput, Textarea, TextInput} from "flowbite-react";
 
 export default function Profile() {
     const [currentPasswordError, setCurrentPasswordError] = useState(null);
     const [newPasswordError, setNewPasswordError] = useState(null);
     const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+    const [selectedFile, setSelectedFile] = useState(null);
+    const [fileError, setFileError] = useState(null);
 
     function validateCurrentPassword(e) {
         const data = e.target.value;
@@ -40,7 +42,7 @@ export default function Profile() {
         }
     }
 
-    function submitForm(e) {
+    function submitFormChangePassword(e) {
         const data = Object.fromEntries(new FormData(e.target).entries());
 
         if (data.currentPassword === "" && data.newPassword === "" && data.confirmPassword === "") {
@@ -69,6 +71,33 @@ export default function Profile() {
             setNewPasswordError(null);
             setConfirmPasswordError(null);
             console.log(data);
+        }
+    }
+
+    function validateFile(e) {
+        const file = e.target.files[0];
+        const fileExtensionArray = file.name.split(".");
+        const fileExtension = fileExtensionArray[fileExtensionArray.length - 1];
+
+        if (file.size > 2048000){
+            setFileError("MAX FILE size is 2MB!");
+        } else if(fileExtension !== "png" && fileExtension !== "jpg" && fileExtension !== "svg"){
+            setFileError("Only SVG, JPG, JPEG and PNG are allowed!");
+            console.log(fileExtension);
+        } else{
+            setFileError(null);
+            setSelectedFile(file);
+        }
+    }
+
+    function submitFormProfilePassword(e) {
+        const data = Object.fromEntries(new FormData(e.target).entries());
+
+        if (fileError !== null) {
+            e.preventDefault();
+        } else {
+            console.log(data);
+            console.log(selectedFile);
         }
     }
 
@@ -271,8 +300,25 @@ export default function Profile() {
                     >
                         Update Product
                     </h5>
-                    <form>
+                    <form onSubmit={(e)=>submitFormProfilePassword(e)}>
                         <div className="space-y-4">
+                            <div>
+                                <div>
+                                    <label
+                                        htmlFor="file-upload"
+                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    >
+                                        Upload file
+                                    </label>
+                                </div>
+                                <FileInput
+                                    id="file-upload"
+                                    helperText={
+                                        fileError ? <span className="text-red-500">{fileError}</span> : <span>{"SVG, PNG or JPG. (MAX SIZE: 2MB)."}</span>
+                                    }
+                                    onChange={(e)=>validateFile(e)}
+                                />
+                            </div>
                             <div className="w-full">
                                 <label
                                     htmlFor="fnameUpdate"
@@ -383,7 +429,7 @@ export default function Profile() {
                     >
                         Update Product
                     </h5>
-                    <form onSubmit={(e)=>submitForm(e)}>
+                    <form onSubmit={(e)=>submitFormChangePassword(e)}>
                         <div className="space-y-4">
                             <div className="w-full">
                                 <label
