@@ -20,10 +20,7 @@ export default function Courses() {
                             Instructions for Semester Registration
                         </h5>
                         <p className="font-normal text-gray-700 dark:text-gray-400">
-                            Select your courses from the list below and click bottom button to proceed. All compulsory courses must be registered, and you can choose a few optional courses based on your required credit limit. Refer to your student handbook to determine the number of credits you need to earn from the optional course list to be eligible for the next semester.
-                        </p>
-                        <p className="font-normal text-gray-700 dark:text-gray-400">
-                            Fill out this form carefully and submit it, as failure to do so may result in issues in the upcoming semester. After submitting your course selection, the system will provide a link to download the registration form for the next semester. Download the form, add your signature, and submit it to the Student Affairs office.
+                            Select your courses from the list below and click bottom button to proceed. All compulsory courses must be registered, and you can choose a few optional courses based on your required credit limit. Refer to your student handbook to determine the number of credits you need to earn from the optional course list to be eligible for the next semester. Fill out this form carefully and submit it, as failure to do so may result in issues in the upcoming semester.
                         </p>
                     </Card>
                 </div>
@@ -123,10 +120,11 @@ export default function Courses() {
                                 </Table.Row>
                             </Table.Body>
                         </Table>
-                        <div className="pt-5 flex justify-center items-center">
+                        <div className="pt-5
+                        flex justify-center items-center">
                             <button
                                 type="submit"
-                                className="max-w-sm text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                className="sm:max-w-sm w-screen text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                             >
                                 Register
                             </button>
