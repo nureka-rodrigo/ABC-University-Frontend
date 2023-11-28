@@ -3,38 +3,18 @@
 
 <head>
   <meta charset="utf-8" />
-  <link rel="icon" href="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" />
+  <link rel="icon" href="../src/logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#000000" />
   <meta name="description" content="Web site created using create-react-app" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <title>ABC University</title>
-  <style>
-    /* Hide scrollbar for Chrome, Safari and Opera */
-    body::-webkit-scrollbar {
-      display: none;
-    }
-
-    /* Hide scrollbar for IE, Edge and Firefox */
-    body {
-      /* IE and Edge */
-      -ms-overflow-style: none;
-      /* Firefox */
-      scrollbar-width: none;
-    }
-  </style>
-  <script>
-    if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark')
-    }
-  </script>
 </head>
 
 <body>
   <noscript>You need to enable JavaScript to run this app.</noscript>
   <div id="root"></div>
+  <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 </body>
 
 </html>
