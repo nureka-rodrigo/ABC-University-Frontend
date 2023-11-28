@@ -1,6 +1,6 @@
 import SidebarStudent from "../components/Sidebar-Student";
 import Footer from "../components/Footer";
-import {Table} from "flowbite-react";
+import {Label, Table} from "flowbite-react";
 import {AiOutlineClose} from "react-icons/ai";
 import {useState} from "react";
 
@@ -214,12 +214,11 @@ export default function Feedback() {
                                             value="1"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback1-option-1"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Poor
-                                        </label>
+                                            value="Poor"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -229,12 +228,11 @@ export default function Feedback() {
                                             value="2"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback1-option-2"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Below Average
-                                        </label>
+                                            value="Below Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -244,12 +242,11 @@ export default function Feedback() {
                                             value="3"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback1-option-3"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Average
-                                        </label>
+                                            value="Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -259,12 +256,11 @@ export default function Feedback() {
                                             value="4"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback1-option-4"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Above Average
-                                        </label>
+                                            value="Above Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -274,12 +270,11 @@ export default function Feedback() {
                                             value="5"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback1-option-5"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Excellent
-                                        </label>
+                                            value="Excellent"
+                                        />
                                     </div>
                                 </div>
                                 <div>
@@ -295,12 +290,11 @@ export default function Feedback() {
                                             value="1"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback2-option-1"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Poor
-                                        </label>
+                                            value="Poor"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -310,12 +304,11 @@ export default function Feedback() {
                                             value="2"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback2-option-2"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Below Average
-                                        </label>
+                                            value="Below Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -325,12 +318,11 @@ export default function Feedback() {
                                             value="3"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback2-option-3"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Average
-                                        </label>
+                                            value="Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -340,12 +332,11 @@ export default function Feedback() {
                                             value="4"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback2-option-4"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Above Average
-                                        </label>
+                                            value="Above Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -355,12 +346,11 @@ export default function Feedback() {
                                             value="5"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback2-option-5"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Excellent
-                                        </label>
+                                        value="Excellent"
+                                        />
                                     </div>
                                 </div>
                                 <div>
@@ -376,12 +366,11 @@ export default function Feedback() {
                                             value="1"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback3-option-1"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Poor
-                                        </label>
+                                            value="Poor"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -391,12 +380,11 @@ export default function Feedback() {
                                             value="2"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback3-option-2"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Below Average
-                                        </label>
+                                        value="Below Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -406,12 +394,11 @@ export default function Feedback() {
                                             value="3"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback3-option-3"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Average
-                                        </label>
+                                        value="Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -421,12 +408,11 @@ export default function Feedback() {
                                             value="4"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback3-option-4"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Above Average
-                                        </label>
+                                        value="Above Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -436,12 +422,11 @@ export default function Feedback() {
                                             value="5"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback3-option-5"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Excellent
-                                        </label>
+                                        value="Excellent"
+                                        />
                                     </div>
                                 </div>
                                 <div>
@@ -457,12 +442,11 @@ export default function Feedback() {
                                             value="1"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback4-option-1"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Poor
-                                        </label>
+                                            value="Poor"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -472,12 +456,11 @@ export default function Feedback() {
                                             value="2"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback4-option-2"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Below Average
-                                        </label>
+                                        value="Below Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -487,12 +470,11 @@ export default function Feedback() {
                                             value="3"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback4-option-3"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Average
-                                        </label>
+                                        value="Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -502,12 +484,11 @@ export default function Feedback() {
                                             value="4"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback4-option-4"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Above Average
-                                        </label>
+                                        value="Above Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -517,12 +498,11 @@ export default function Feedback() {
                                             value="5"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback4-option-5"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Excellent
-                                        </label>
+                                        value="Excellent"
+                                        />
                                     </div>
                                 </div>
                                 <div>
@@ -538,12 +518,11 @@ export default function Feedback() {
                                             value="1"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback5-option-1"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Poor
-                                        </label>
+                                            value="Poor"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -553,12 +532,11 @@ export default function Feedback() {
                                             value="2"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback5-option-2"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Below Average
-                                        </label>
+                                        value="Below Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -568,12 +546,11 @@ export default function Feedback() {
                                             value="3"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback4-option-3"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Average
-                                        </label>
+                                        value="Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -583,12 +560,11 @@ export default function Feedback() {
                                             value="4"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback5-option-4"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Above Average
-                                        </label>
+                                        value="Above Average"
+                                        />
                                     </div>
                                     <div className="flex items-center mb-4">
                                         <input
@@ -598,12 +574,11 @@ export default function Feedback() {
                                             value="5"
                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                         />
-                                        <label
+                                        <Label
                                             htmlFor="feedback5-option-5"
                                             className="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-                                        >
-                                            Excellent
-                                        </label>
+                                        value="Excellent"
+                                        />
                                     </div>
                                 </div>
                                 <div className="text-center pb-3">

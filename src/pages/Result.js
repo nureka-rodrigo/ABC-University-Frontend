@@ -1,5 +1,5 @@
 import SidebarStudent from "../components/Sidebar-Student";
-import {Table} from "flowbite-react";
+import {Select, Table} from "flowbite-react";
 import Footer from "../components/Footer";
 
 export default function Result() {
@@ -14,9 +14,8 @@ export default function Result() {
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <div className="mt-5 ml-5 mr-5 md:w-36">
                     <form>
-                        <select
-                            id="countries"
-                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        <Select
+                            id="semesters"
                             onChange={(e) => submitSemester(e)}
                         >
                             <option>Semester 1</option>
@@ -26,7 +25,7 @@ export default function Result() {
                             <option>Semester 6</option>
                             <option>Semester 7</option>
                             <option>Semester 8</option>
-                        </select>
+                        </Select>
                     </form>
                 </div>
                 <div className="overflow-x-auto p-5">
