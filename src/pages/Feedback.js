@@ -6,7 +6,15 @@ import {useState} from "react";
 
 export default function Feedback() {
     const [feedbackError, setFeedbackError] = useState(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
     const feedbackTable = [
         {
             code: "CST 102-2",
@@ -144,9 +152,8 @@ export default function Feedback() {
                                         <Table.Cell>{value?.lecturer}</Table.Cell>
                                         <Table.Cell>
                                             <button
-                                                data-modal-target="feedback-modal"
-                                                data-modal-toggle="feedback-modal"
                                                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                                                onClick={openModal}
                                             >
                                                 Feedback
                                             </button>
@@ -164,8 +171,8 @@ export default function Feedback() {
                 <div
                     id="feedback-modal"
                     tabIndex="-1"
-                    aria-hidden="true"
-                    className="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full"
+                    aria-hidden={!isModalOpen}
+                    className={`overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center h-[calc(100%-1rem)] w-full ${isModalOpen ? '' : 'hidden'}`}
                 >
                     <div className="relative p-4 w-full max-w-md max-h-full">
                         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -177,7 +184,7 @@ export default function Feedback() {
                                 <button
                                     type="button"
                                     className="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-                                    data-modal-hide="feedback-modal"
+                                    onClick={closeModal}
                                 >
                                     <AiOutlineClose/>
                                     <span className="sr-only">Close modal</span>
