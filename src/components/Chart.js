@@ -27,6 +27,10 @@ export default function SemesterChart() {
                     },
                 ],
             },
+            options: {
+                maintainAspectRatio: false,
+                responsive: true,
+            },
         });
         return () => {
             myChart.destroy();
@@ -35,7 +39,7 @@ export default function SemesterChart() {
 
     return (
         <>
-            <div>
+            <div className="h-96">
                 <canvas id="semester"></canvas>
             </div>
         </>
