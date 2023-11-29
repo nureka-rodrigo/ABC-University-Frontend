@@ -9,6 +9,24 @@ export default function Profile() {
     const [confirmPasswordError, setConfirmPasswordError] = useState(null);
     const [selectedFile, setSelectedFile] = useState(null);
     const [fileError, setFileError] = useState(null);
+    const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
+    const [isPasswordDrawerOpen, setIsPasswordDrawerOpen] = useState(false);
+
+    const openProfileDrawer = () => {
+        setIsProfileDrawerOpen(true);
+    };
+
+    const closeProfileDrawer = () => {
+        setIsProfileDrawerOpen(false);
+    };
+
+    const openPasswordDrawer = () => {
+        setIsPasswordDrawerOpen(true);
+    };
+
+    const closePasswordDrawer = () => {
+        setIsPasswordDrawerOpen(false);
+    };
 
     function validateCurrentPassword(e) {
         const data = e.target.value;
@@ -276,18 +294,16 @@ export default function Profile() {
                             <button
                                 className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 type="button"
-                                data-drawer-target="profile-update"
-                                data-drawer-show="profile-update"
                                 aria-controls="profile-update"
+                                onClick={openProfileDrawer}
                             >
                                 Update Profile
                             </button>
                             <button
                                 type="button"
                                 className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-                                data-drawer-target="password-update"
-                                data-drawer-show="password-update"
                                 aria-controls="password-update"
+                                onClick={openPasswordDrawer}
                             >
                                 Change Password
                             </button>
@@ -297,7 +313,9 @@ export default function Profile() {
 
                 <div
                     id="profile-update"
-                    className="fixed top-0 left-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
+                    className={`fixed top-0 left-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform ${
+                        isProfileDrawerOpen ? '' : '-translate-x-full'
+                    } bg-white dark:bg-gray-800`}
                     tabIndex="-1"
                     aria-labelledby="drawer-label"
                     aria-hidden="true"
@@ -408,6 +426,7 @@ export default function Profile() {
                                 data-drawer-dismiss="profile-update"
                                 aria-controls="profile-update"
                                 className="w-full justify-center text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                onClick={closeProfileDrawer}
                             >
                                 <svg
                                     aria-hidden="true"
@@ -430,7 +449,9 @@ export default function Profile() {
 
                 <div
                     id="password-update"
-                    className="fixed top-0 left-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform -translate-x-full bg-white dark:bg-gray-800"
+                    className={`fixed top-0 left-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform ${
+                        isPasswordDrawerOpen ? '' : '-translate-x-full'
+                    } bg-white dark:bg-gray-800`}
                     tabIndex="-1"
                     aria-labelledby="drawer-label"
                     aria-hidden="true"
@@ -514,6 +535,7 @@ export default function Profile() {
                                 data-drawer-dismiss="password-update"
                                 aria-controls="password-update"
                                 className="w-full justify-center text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
+                                onClick={closePasswordDrawer}
                             >
                                 <svg
                                     aria-hidden="true"
