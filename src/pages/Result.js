@@ -69,15 +69,17 @@ export default function Result() {
             type: "C",
         },
     ];
-    
+
     let selectedSemester = null;
+
     function submitSemester(e) {
         selectedSemester = e.target.value;
         console.log(selectedSemester);
     }
+
     return (
         <>
-            <SidebarStudent />
+            <SidebarStudent/>
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <div className="mt-5 ml-5 mr-5 md:w-36">
                     <form>
@@ -122,7 +124,7 @@ export default function Result() {
                         </Table.Body>
                     </Table>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         </>
     );

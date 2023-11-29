@@ -6,11 +6,11 @@ import SemesterChart from "../components/Chart";
 export default function Dashboard() {
     return (
         <>
-            <SidebarStudent />
+            <SidebarStudent/>
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <div className="p-5">
                     <Card className="w-auto h-auto">
-                        <SemesterChart />
+                        <SemesterChart/>
                     </Card>
                 </div>
                 <div className="p-5 pt-0">
@@ -23,7 +23,7 @@ export default function Dashboard() {
                         </p>
                     </Card>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         </>
     );

@@ -67,9 +67,10 @@ export default function Courses() {
         const data = Object.fromEntries(new FormData(e.target).entries());
         console.log(data);
     }
+
     return (
         <>
-            <SidebarStudent />
+            <SidebarStudent/>
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <div className="p-5">
                     <Card className="w-full">
@@ -77,12 +78,16 @@ export default function Courses() {
                             Instructions for Semester Registration
                         </h5>
                         <p className="font-normal text-gray-700 dark:text-gray-400">
-                            Select your courses from the list below and click bottom button to proceed. All compulsory courses must be registered, and you can choose a few optional courses based on your required credit limit. Refer to your student handbook to determine the number of credits you need to earn from the optional course list to be eligible for the next semester. Fill out this form carefully and submit it, as failure to do so may result in issues in the upcoming semester.
+                            Select your courses from the list below and click bottom button to proceed. All compulsory
+                            courses must be registered, and you can choose a few optional courses based on your required
+                            credit limit. Refer to your student handbook to determine the number of credits you need to
+                            earn from the optional course list to be eligible for the next semester. Fill out this form
+                            carefully and submit it, as failure to do so may result in issues in the upcoming semester.
                         </p>
                     </Card>
                 </div>
                 <div className="overflow-x-auto p-5 pt-0">
-                    <form onSubmit={(e)=>submitCourses(e)}>
+                    <form onSubmit={(e) => submitCourses(e)}>
                         <Table hoverable>
                             <Table.Head>
                                 <Table.HeadCell>Course Code</Table.HeadCell>
@@ -105,7 +110,8 @@ export default function Courses() {
                                             <Table.Cell>{value?.credits}</Table.Cell>
                                             <Table.Cell>{value?.type}</Table.Cell>
                                             <Table.Cell className="p-4">
-                                                <Checkbox className="checked:!bg-primary-600" id={value?.code} name={value?.code}/>
+                                                <Checkbox className="checked:!bg-primary-600" id={value?.code}
+                                                          name={value?.code}/>
                                             </Table.Cell>
                                         </Table.Row>
                                     );
@@ -123,7 +129,7 @@ export default function Courses() {
                         </div>
                     </form>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         </>
     );

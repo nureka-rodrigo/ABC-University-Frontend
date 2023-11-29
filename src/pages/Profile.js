@@ -111,7 +111,7 @@ export default function Profile() {
 
     return (
         <>
-            <SidebarStudent />
+            <SidebarStudent/>
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <section className="bg-white dark:bg-gray-900">
                     <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -395,7 +395,8 @@ export default function Profile() {
                                 ></Textarea>
                             </div>
                         </div>
-                        <div className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
+                        <div
+                            className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
                             <button
                                 type="submit"
                                 className="w-full justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
@@ -500,7 +501,8 @@ export default function Profile() {
                                 />
                             </div>
                         </div>
-                        <div className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
+                        <div
+                            className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
                             <button
                                 type="submit"
                                 className="w-full justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
@@ -531,7 +533,7 @@ export default function Profile() {
                         </div>
                     </form>
                 </div>
-                <Footer />
+                <Footer/>
             </div>
         </>
     );
