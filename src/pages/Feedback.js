@@ -138,10 +138,10 @@ export default function Feedback() {
                                         className="bg-white dark:border-gray-700 dark:bg-gray-800"
                                         key={i}
                                     >
-                                        <Table.Cell>{value.code}</Table.Cell>
-                                        <Table.Cell>{value.title}</Table.Cell>
-                                        <Table.Cell>{value.credits}</Table.Cell>
-                                        <Table.Cell>{value.lecturer}</Table.Cell>
+                                        <Table.Cell>{value?.code}</Table.Cell>
+                                        <Table.Cell>{value?.title}</Table.Cell>
+                                        <Table.Cell>{value?.credits}</Table.Cell>
+                                        <Table.Cell>{value?.lecturer}</Table.Cell>
                                         <Table.Cell>
                                             <button
                                                 data-modal-target="feedback-modal"

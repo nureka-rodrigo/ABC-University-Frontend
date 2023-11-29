@@ -3,6 +3,73 @@ import {Select, Table} from "flowbite-react";
 import Footer from "../components/Footer";
 
 export default function Result() {
+
+    const resultTable = [
+        {
+            code: "CST 102-2",
+            title: "Introduction to Computer Science",
+            credits: "2",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "CST 101-2",
+            title: "Fundamentals of Electronics",
+            credits: "2",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "CST 121-3",
+            title: "Structured Programming",
+            credits: "3",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "CST 111-2",
+            title: "Essential Mathematics",
+            credits: "2",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "ESD 121-2",
+            title: "English Language Level-I",
+            credits: "2",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "CST 122-2",
+            title: "Web Programming",
+            credits: "2",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "CST 131-2",
+            title: "Fundamentals of Computer Network",
+            credits: "2",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "ESD 161-1",
+            title: "Tamil Language-I",
+            credits: "1",
+            grade: "A+",
+            type: "C",
+        },
+        {
+            code: "BGE 121-2",
+            title: "Ethics and Law Basics",
+            credits: "1",
+            grade: "A+",
+            type: "C",
+        },
+    ];
+    
     let selectedSemester = null;
     function submitSemester(e) {
         selectedSemester = e.target.value;
@@ -38,69 +105,20 @@ export default function Result() {
                             <Table.HeadCell>Type of Credits</Table.HeadCell>
                         </Table.Head>
                         <Table.Body className="divide-y">
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>CST 102-2</Table.Cell>
-                                <Table.Cell>Introduction to Computer Science</Table.Cell>
-                                <Table.Cell>2</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>CST 101-2</Table.Cell>
-                                <Table.Cell>Fundamentals of Electronics</Table.Cell>
-                                <Table.Cell>2</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>CST 121-3</Table.Cell>
-                                <Table.Cell>Structured Programming</Table.Cell>
-                                <Table.Cell>3</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>CST 111-2</Table.Cell>
-                                <Table.Cell>Essential Mathematics</Table.Cell>
-                                <Table.Cell>2</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>ESD 121-2</Table.Cell>
-                                <Table.Cell>English Language Level-I</Table.Cell>
-                                <Table.Cell>2</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>CST 122-2</Table.Cell>
-                                <Table.Cell>Web Programming</Table.Cell>
-                                <Table.Cell>2</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>CST 131-2</Table.Cell>
-                                <Table.Cell>Fundamentals of Computer Network</Table.Cell>
-                                <Table.Cell>2</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>ESD 161-1</Table.Cell>
-                                <Table.Cell>Tamil Language-I</Table.Cell>
-                                <Table.Cell>1</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell>BGE 121-2</Table.Cell>
-                                <Table.Cell>Ethics and Law Basics</Table.Cell>
-                                <Table.Cell>1</Table.Cell>
-                                <Table.Cell>A+</Table.Cell>
-                                <Table.Cell>C</Table.Cell>
-                            </Table.Row>
+                            {resultTable.map((value, i) => {
+                                return (
+                                    <Table.Row
+                                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                        key={i}
+                                    >
+                                        <Table.Cell>{value?.code}</Table.Cell>
+                                        <Table.Cell>{value?.title}</Table.Cell>
+                                        <Table.Cell>{value?.credits}</Table.Cell>
+                                        <Table.Cell>{value?.grade}</Table.Cell>
+                                        <Table.Cell>{value?.type}</Table.Cell>
+                                    </Table.Row>
+                                );
+                            })}
                         </Table.Body>
                     </Table>
                 </div>
