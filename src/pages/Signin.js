@@ -34,7 +34,7 @@ export default function Signin() {
         }
     }
 
-    async function submitForm(e) {
+     function submitForm(e) {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
         const formData = new FormData(e.target);
@@ -51,17 +51,16 @@ export default function Signin() {
             setPasswordError(null);
             setIsLoading(true);
 
-            await axios
+            axios
                 .post("http://127.0.0.1:8000/api/login/", formData)
                 .then((response) => {
                     if (response.status === 200) {
-                        console.log(response.data.token);
                         const token = response.data.token;
                         if(isChecked){
                             Cookies.set('token', token, { expires: 7, path: '/' });
                         }
                         else{
-                            Cookies.set('token', token);
+                            Cookies.set('token', token, { path: '/' });
                         }
                         window.location.href = "/dashboard";
                         setIsLoading(false);

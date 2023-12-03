@@ -6,18 +6,53 @@ import {Link, useLocation} from "react-router-dom";
 import ThemeToggler from "./Theme-Toggler";
 import Logo from "../logo.svg";
 import ImageStudent from "../assests/img/people/students/Nureka.jpg";
+import LoadingSpinner from "./Loading-Spinner";
+import React, {useState} from "react";
+import axios from "axios";
+import Cookies from "js-cookie";
+import {toast} from "react-toastify";
 
 export default function SidebarStudent() {
 
   let pathArray = useLocation().pathname.split("/");
   let lastPart = pathArray[pathArray.length - 1];
+  const [isLoading, setIsLoading] = useState(false);
 
-  function signout() {
-    window.location.href="/";
+   function signout() {
+
+    setIsLoading(true);
+    const token = Cookies.get('token', { path: '/' });
+
+    axios.post("http://127.0.0.1:8000/api/logout/", "", {
+      headers: {
+        'authorization': `Token ${token}`,
+        'Accept' : 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+        .then(response => {
+          Cookies.remove('token', { path: '/' });
+          setIsLoading(false);
+          window.location.href = "/";
+        })
+        .catch((error) => {
+          toast.error('' + error, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
+          setIsLoading(false);
+        });
   }
 
   return (
       <>
+        {isLoading && <LoadingSpinner />}
         <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
           <div className="px-3 py-3 lg:px-5 lg:pl-3">
             <div className="flex items-center justify-between">
