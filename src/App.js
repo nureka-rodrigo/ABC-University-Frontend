@@ -9,6 +9,8 @@ import ErrorPage from "./pages/404";
 import Signin from "./pages/Signin";
 import Test from "./pages/test";
 import {ToastContainer} from "react-toastify";
+import PrivateRoute from "./components/Private-Route";
+import AnonymousRoute from "./components/Anonymous-Route";
 
 export default function App() {
 
@@ -22,6 +24,22 @@ export default function App() {
       <>
           <ToastContainer/>
           <Routes>
+              <Route element={<PrivateRoute />}>
+                  <Route path={"/dashboard"} element={<Dashboard/>}/>
+                  <Route path={"/profile"} element={<Profile/>}/>
+                  <Route path={"/courses"} element={<Courses/>}/>
+                  <Route path={"/result"} element={<Result/>}/>
+                  <Route path={"/feedback"} element={<Feedback/>}/>
+                  <Route path={"/test"} element={<Test/>}/>
+                  <Route path={"*"} element={<ErrorPage/>}/>
+              </Route>
+              <Route element={<AnonymousRoute />}>
+                  <Route path={"/"} element={<Signin/>}/>
+                  <Route path={"/test"} element={<Test/>}/>
+                  <Route path={"*"} element={<ErrorPage/>}/>
+              </Route>
+
+              {/*
               <Route path={"/"} element={<Signin/>}/>
               <Route path={"/dashboard"} element={<Dashboard/>}/>
               <Route path={"/profile"} element={<Profile/>}/>
@@ -30,6 +48,7 @@ export default function App() {
               <Route path={"/feedback"} element={<Feedback/>}/>
               <Route path={"/test"} element={<Test/>}/>
               <Route path={"*"} element={<ErrorPage/>}/>
+              */}
           </Routes>
       </>
   );

@@ -17,11 +17,15 @@ export default function SidebarStudent() {
   let pathArray = useLocation().pathname.split("/");
   let lastPart = pathArray[pathArray.length - 1];
   const [isLoading, setIsLoading] = useState(false);
+  const token = Cookies.get('token', { path: '/' });
+
+  if(!token){
+    window.location.href = "/";
+  }
 
    function signout() {
 
     setIsLoading(true);
-    const token = Cookies.get('token', { path: '/' });
 
     axios.post("http://127.0.0.1:8000/api/logout/", "", {
       headers: {
@@ -99,7 +103,7 @@ export default function SidebarStudent() {
               <li className="flex items-center pt-3 pb-5 pl-10 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                 <div className="flex flex-col items-center">
                   <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={ImageStudent}
-                       alt="student image"/>
+                       alt="student"/>
                   <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Nureka Rodrigo</h5>
                   <span className="text-sm text-gray-500 dark:text-gray-400">Student</span>
                 </div>
