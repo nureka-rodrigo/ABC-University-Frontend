@@ -1,11 +1,18 @@
 import React, {useState} from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import LoadingSpinner from "../components/Loading-Spinner";
 import {Label, TextInput} from "flowbite-react";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import Cookies from 'js-cookie';
 
 export default function Signin() {
     const [usernameError, setUsernameError] = useState(null);
     const [passwordError, setPasswordError] = useState(null);
+    const [isChecked, setIsChecked] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     function validateUsername(e) {
         const data = e.target.value;
@@ -27,9 +34,10 @@ export default function Signin() {
         }
     }
 
-    function submitForm(e) {
+    async function submitForm(e) {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
+        const formData = new FormData(e.target);
 
         if (data.username === "" && data.password === "") {
             setUsernameError("Username can not be empty!");
@@ -41,8 +49,37 @@ export default function Signin() {
         } else {
             setUsernameError(null);
             setPasswordError(null);
-            console.log(data);
-            window.location.href = "/dashboard";
+            setIsLoading(true);
+
+            await axios
+                .post("http://127.0.0.1:8000/api/login/", formData)
+                .then((response) => {
+                    if (response.status === 200) {
+                        console.log(response.data.token);
+                        const token = response.data.token;
+                        if(isChecked){
+                            Cookies.set('token', token, { expires: 7, path: '/' });
+                        }
+                        else{
+                            Cookies.set('token', token);
+                        }
+                        window.location.href = "/dashboard";
+                        setIsLoading(false);
+                    }
+                })
+                .catch((error) => {
+                    toast.error('Username or Password is incorrect', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "dark",
+                    });
+                    setIsLoading(false);
+                });
         }
     }
 
@@ -51,6 +88,7 @@ export default function Signin() {
             <section className="bg-gray-100 dark:bg-gray-900 bg-auto bg-svg-animation">
                 <Header></Header>
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen lg:py-0">
+                    {isLoading && <LoadingSpinner />}
                     <div
                         className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
                         <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
@@ -101,6 +139,8 @@ export default function Signin() {
                                                     type="checkbox"
                                                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
                                                     required=""
+                                                    checked={isChecked}
+                                                    onChange={()=>setIsChecked(!isChecked)}
                                                 />
                                             </div>
                                             <div className="ml-3 text-sm">

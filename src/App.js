@@ -8,6 +8,7 @@ import Feedback from "./pages/Feedback";
 import ErrorPage from "./pages/404";
 import Signin from "./pages/Signin";
 import Test from "./pages/test";
+import {ToastContainer} from "react-toastify";
 
 export default function App() {
 
@@ -19,6 +20,7 @@ export default function App() {
 
     return (
       <>
+          <ToastContainer/>
           <Routes>
               <Route path={"/"} element={<Signin/>}/>
               <Route path={"/dashboard"} element={<Dashboard/>}/>
