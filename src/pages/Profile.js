@@ -14,6 +14,7 @@ export default function Profile() {
 
     const openProfileDrawer = () => {
         setIsProfileDrawerOpen(true);
+        closePasswordDrawer();
     };
 
     const closeProfileDrawer = () => {
@@ -22,13 +23,14 @@ export default function Profile() {
 
     const openPasswordDrawer = () => {
         setIsPasswordDrawerOpen(true);
+        closeProfileDrawer();
     };
 
     const closePasswordDrawer = () => {
         setIsPasswordDrawerOpen(false);
     };
 
-    function validateCurrentPassword(e) {
+    const validateCurrentPassword = (e) => {
         const data = e.target.value;
 
         if (data === "") {
@@ -38,7 +40,7 @@ export default function Profile() {
         }
     }
 
-    function validateNewPassword(e) {
+    const validateNewPassword = (e) => {
         const data = e.target.value;
 
         if (data === "") {
@@ -50,7 +52,7 @@ export default function Profile() {
         }
     }
 
-    function validateConfirmPassword(e) {
+    const validateConfirmPassword = (e) => {
         const data = e.target.value;
 
         if (data === "") {
@@ -60,7 +62,7 @@ export default function Profile() {
         }
     }
 
-    function submitFormChangePassword(e) {
+    const submitFormChangePassword = (e) => {
         const data = Object.fromEntries(new FormData(e.target).entries());
 
         if (
@@ -96,7 +98,7 @@ export default function Profile() {
         }
     }
 
-    function validateFile(e) {
+    const validateFile = (e) => {
         const file = e.target.files[0];
         const fileExtensionArray = file.name.split(".");
         const fileExtension = fileExtensionArray[fileExtensionArray.length - 1];
@@ -116,7 +118,7 @@ export default function Profile() {
         }
     }
 
-    function submitFormProfilePassword(e) {
+    const submitFormProfilePassword = (e) => {
         const data = Object.fromEntries(new FormData(e.target).entries());
 
         if (fileError !== null) {
@@ -216,8 +218,8 @@ export default function Profile() {
                                     type="text"
                                     name="department"
                                     id="department"
-                                    defaultValue="Computer Science & Technology"
-                                    placeholder="Computer Science & Technology"
+                                    defaultValue="Computer Science & Informatics"
+                                    placeholder="Computer Science & Informatics"
                                     required=""
                                     readOnly
                                 />
@@ -233,7 +235,7 @@ export default function Profile() {
                                     type="text"
                                     name="faculty"
                                     id="faculty"
-                                    defaultValue="Faculty of Applied Science"
+                                    defaultValue="Faculty of Applied Sciences"
                                     placeholder="Faculty of Applied Sciences"
                                     required=""
                                     readOnly

@@ -38,17 +38,6 @@ export default function App() {
                   <Route path={"/test"} element={<Test/>}/>
                   <Route path={"*"} element={<ErrorPage/>}/>
               </Route>
-
-              {/*
-              <Route path={"/"} element={<Signin/>}/>
-              <Route path={"/dashboard"} element={<Dashboard/>}/>
-              <Route path={"/profile"} element={<Profile/>}/>
-              <Route path={"/courses"} element={<Courses/>}/>
-              <Route path={"/result"} element={<Result/>}/>
-              <Route path={"/feedback"} element={<Feedback/>}/>
-              <Route path={"/test"} element={<Test/>}/>
-              <Route path={"*"} element={<ErrorPage/>}/>
-              */}
           </Routes>
       </>
   );
