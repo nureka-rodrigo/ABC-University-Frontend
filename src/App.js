@@ -11,8 +11,11 @@ import Test from "./pages/test";
 import {ToastContainer} from "react-toastify";
 import PrivateRoute from "./components/Private-Route";
 import AnonymousRoute from "./components/Anonymous-Route";
+import axios from "axios";
 
 export default function App() {
+
+    axios.defaults.withCredentials = true;
 
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark');
