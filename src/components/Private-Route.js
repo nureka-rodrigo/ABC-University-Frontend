@@ -1,16 +1,13 @@
 import {Navigate, Outlet} from "react-router-dom";
 import Cookies from "js-cookie";
 import axios from "axios";
+import {TokenHeader} from "../data/TokenHeader";
 
 export default function PrivateRoute () {
     const token = Cookies.get('token', { path: '/' });
 
     axios.post("http://127.0.0.1:8000/api/check/", "", {
-        headers: {
-            'authorization': `Token ${token}`,
-            'Accept' : 'application/json',
-            'Content-Type': 'application/json'
-        }
+        ...TokenHeader
     })
         .then(response => {
             if (response.status !== 200) {
