@@ -7,6 +7,7 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import Cookies from 'js-cookie';
+import {ToastSettings} from "../data/ToastSettings";
 
 export default function Signin() {
     const [usernameError, setUsernameError] = useState(null);
@@ -24,7 +25,7 @@ export default function Signin() {
         }
     }
 
-    function validatePassword(e) {
+    const validatePassword = (e) => {
         const data = e.target.value;
 
         if (data === "") {
@@ -34,7 +35,7 @@ export default function Signin() {
         }
     }
 
-     function submitForm(e) {
+     const submitForm = (e) => {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
         const formData = new FormData(e.target);
@@ -66,16 +67,9 @@ export default function Signin() {
                         setIsLoading(false);
                     }
                 })
-                .catch((error) => {
+                .catch(() => {
                     toast.error('Username or Password is incorrect', {
-                        position: "top-right",
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "dark",
+                        ...ToastSettings
                     });
                     setIsLoading(false);
                 });
