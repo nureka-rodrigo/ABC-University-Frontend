@@ -1,7 +1,12 @@
 import SidebarStudent from "../components/Sidebar-Student";
 import Footer from "../components/Footer";
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {FileInput, Textarea, TextInput} from "flowbite-react";
+import axios from "axios";
+import {toast} from "react-toastify";
+import LoadingSpinner from "../components/Loading-Spinner";
+import {ToastSettings} from "../data/ToastSettings";
+import {TokenHeader} from "../data/TokenHeader";
 
 export default function Profile() {
     const [currentPasswordError, setCurrentPasswordError] = useState(null);
@@ -11,6 +16,8 @@ export default function Profile() {
     const [fileError, setFileError] = useState(null);
     const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
     const [isPasswordDrawerOpen, setIsPasswordDrawerOpen] = useState(false);
+    const [student, setStudent] = useState([null]);
+    const [isLoading, setIsLoading] = useState(false);
 
     const openProfileDrawer = () => {
         setIsProfileDrawerOpen(true);
@@ -62,42 +69,6 @@ export default function Profile() {
         }
     }
 
-    const submitFormChangePassword = (e) => {
-        const data = Object.fromEntries(new FormData(e.target).entries());
-
-        if (
-            data.currentPassword === "" &&
-            data.newPassword === "" &&
-            data.confirmPassword === ""
-        ) {
-            e.preventDefault();
-            setCurrentPasswordError("This field must be filled out!");
-            setNewPasswordError("This field must be filled out!");
-            setConfirmPasswordError("This field must be filled out!");
-        } else if (data.currentPassword === "") {
-            e.preventDefault();
-            setCurrentPasswordError("This field must be filled out!");
-        } else if (data.newPassword === "") {
-            e.preventDefault();
-            setNewPasswordError("This field must be filled out!");
-        } else if (data.confirmPassword === "") {
-            e.preventDefault();
-            setConfirmPasswordError("This field must be filled out!");
-        } else if (data.newPassword.length < 8) {
-            e.preventDefault();
-            setNewPasswordError("Password should contains 8 or more characters!");
-        } else if (data.newPassword !== data.confirmPassword) {
-            e.preventDefault();
-            setNewPasswordError("Passwords does not match!");
-            setConfirmPasswordError("Passwords does not match!");
-        } else {
-            setCurrentPasswordError(null);
-            setNewPasswordError(null);
-            setConfirmPasswordError(null);
-            console.log(data);
-        }
-    }
-
     const validateFile = (e) => {
         const file = e.target.files[0];
         const fileExtensionArray = file.name.split(".");
@@ -106,32 +77,128 @@ export default function Profile() {
         if (file.size > 2048000) {
             setFileError("MAX FILE size is 2MB!");
         } else if (
-            fileExtension !== "png" &&
-            fileExtension !== "jpg" &&
-            fileExtension !== "svg"
+                fileExtension !== "png" &&
+                fileExtension !== "jpg" &&
+                fileExtension !== "svg"
         ) {
             setFileError("Only SVG, JPG, JPEG and PNG are allowed!");
-            console.log(fileExtension);
         } else {
             setFileError(null);
             setSelectedFile(file);
         }
     }
 
-    const submitFormProfilePassword = (e) => {
+    const submitFormChangePassword = (e) => {
         const data = Object.fromEntries(new FormData(e.target).entries());
+        const formData = new FormData(e.target);
+        e.preventDefault();
 
-        if (fileError !== null) {
-            e.preventDefault();
+        if (
+            data.currentPassword === "" &&
+            data.newPassword === "" &&
+            data.confirmPassword === ""
+        ) {
+            setCurrentPasswordError("This field must be filled out!");
+            setNewPasswordError("This field must be filled out!");
+            setConfirmPasswordError("This field must be filled out!");
+        } else if (data.currentPassword === "") {
+            setCurrentPasswordError("This field must be filled out!");
+        } else if (data.newPassword === "") {
+            setNewPasswordError("This field must be filled out!");
+        } else if (data.confirmPassword === "") {
+            setConfirmPasswordError("This field must be filled out!");
+        } else if (data.newPassword.length < 8) {
+            setNewPasswordError("Password should contains 8 or more characters!");
+        } else if (data.newPassword !== data.confirmPassword) {
+            setNewPasswordError("Passwords does not match!");
+            setConfirmPasswordError("Passwords does not match!");
         } else {
-            console.log(data);
-            console.log(selectedFile);
+            setCurrentPasswordError(null);
+            setNewPasswordError(null);
+            setConfirmPasswordError(null);
+            setIsLoading(true);
+
+            axios
+                    .post(`http://127.0.0.1:8000/api/user/change_password/`, formData, {
+                        ...TokenHeader
+                    })
+                    .then((response) => {
+                        if (response.status === 200) {
+                            toast.success('Password updated successfully', {
+                                ...ToastSettings
+                            });
+                            setIsPasswordDrawerOpen(false);
+                            setIsLoading(false);
+                        }
+                    })
+                    .catch(() => {
+                        toast.error('An error occurred!', {
+                            ...ToastSettings
+                        });
+                        setIsLoading(false);
+                    });
         }
     }
+
+    const submitFormProfile = (e) => {
+        const formData = new FormData(e.target);
+        e.preventDefault();
+
+        if (fileError === null) {
+            setIsLoading(true);
+            axios
+                    .post(`http://127.0.0.1:8000/api/user/student/`, formData, {
+                        ...TokenHeader
+                    })
+                    .then((response) => {
+                        if (response.status === 200) {
+                            setStudent(response.data);
+                            toast.success('Profile updated successfully', {
+                                ...ToastSettings
+                            });
+                            setIsProfileDrawerOpen(false);
+                            setIsLoading(false);
+                            console.log(response.data);
+                        }
+                        getStudentDetails();
+                    })
+                    .catch(() => {
+                        toast.error('An error occurred!', {
+                            ...ToastSettings
+                        });
+                        setIsLoading(false);
+                    });
+        }
+    }
+
+    const getStudentDetails = useCallback(() => {
+        setIsLoading(true);
+        axios
+                .post(`http://127.0.0.1:8000/api/user/student/`, "",{
+                    ...TokenHeader
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        setStudent(response.data);
+                        setIsLoading(false);
+                    }
+                })
+                .catch(() => {
+                    toast.error('Error loading data!', {
+                        ...ToastSettings
+                    });
+                    setIsLoading(false);
+                });
+    },[setIsLoading])
+
+    useEffect(()=>{
+        getStudentDetails()
+    },[getStudentDetails])
 
     return (
         <>
             <SidebarStudent/>
+            {isLoading && <LoadingSpinner />}
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <section className="bg-white dark:bg-gray-900">
                     <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -150,8 +217,8 @@ export default function Profile() {
                                     type="text"
                                     name="fname"
                                     id="fname"
-                                    value="Nureka"
-                                    placeholder="Nureka"
+                                    defaultValue={student?.first_name}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -167,8 +234,8 @@ export default function Profile() {
                                     type="text"
                                     name="lname"
                                     id="lname"
-                                    defaultValue="Rodrigo"
-                                    placeholder="Rodrigo"
+                                    defaultValue={student?.last_name}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -184,8 +251,8 @@ export default function Profile() {
                                     type="email"
                                     name="email"
                                     id="email"
-                                    defaultValue="cst20069@std.uwu.ac.lk"
-                                    placeholder="cst20069@std.uwu.ac.lk"
+                                    defaultValue={student?.email}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -201,8 +268,8 @@ export default function Profile() {
                                     type="text"
                                     name="degree"
                                     id="degree"
-                                    defaultValue="Computer Science & Technology"
-                                    placeholder="Computer Science & Technology"
+                                    defaultValue={student?.degree?.name}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -218,8 +285,8 @@ export default function Profile() {
                                     type="text"
                                     name="department"
                                     id="department"
-                                    defaultValue="Computer Science & Informatics"
-                                    placeholder="Computer Science & Informatics"
+                                    defaultValue={student?.department?.name}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -235,8 +302,8 @@ export default function Profile() {
                                     type="text"
                                     name="faculty"
                                     id="faculty"
-                                    defaultValue="Faculty of Applied Sciences"
-                                    placeholder="Faculty of Applied Sciences"
+                                    defaultValue={student?.faculty?.name}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -252,8 +319,8 @@ export default function Profile() {
                                     type="number"
                                     name="tel"
                                     id="tel"
-                                    defaultValue="0767579998"
-                                    placeholder="0767579998"
+                                    defaultValue={student?.tel}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -269,8 +336,8 @@ export default function Profile() {
                                     type="text"
                                     name="dob"
                                     id="dob"
-                                    defaultValue="12/23/1999"
-                                    placeholder="12/23/1999"
+                                    defaultValue={student?.dob}
+                                    placeholder="-"
                                     required=""
                                     readOnly
                                 />
@@ -286,8 +353,8 @@ export default function Profile() {
                                     id="bio"
                                     name="bio"
                                     rows="8"
-                                    placeholder="Write a biography here..."
-                                    defaultValue="I am passionate about exploring the vast world of technology and its applications. With a strong foundation in computer networks, programming, algorithms, and problem-solving, I am eager to contribute my skills and learn from experienced professionals in the field."
+                                    defaultValue={student?.description}
+                                    placeholder="-"
                                     readOnly
                                 />
                             </div>
@@ -296,7 +363,6 @@ export default function Profile() {
                             <button
                                 className="text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                                 type="button"
-                                aria-controls="profile-update"
                                 onClick={openProfileDrawer}
                             >
                                 Update Profile
@@ -304,7 +370,6 @@ export default function Profile() {
                             <button
                                 type="button"
                                 className="text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
-                                aria-controls="password-update"
                                 onClick={openPasswordDrawer}
                             >
                                 Change Password
@@ -314,8 +379,7 @@ export default function Profile() {
                 </section>
 
                 <div
-                    id="profile-update"
-                    className={`fixed top-0 left-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform ${
+                    className={`fixed top-0 left-0 z-40 w-full min-h-screen h-full max-w-xs p-4 overflow-y-auto transition-transform ${
                         isProfileDrawerOpen ? '' : '-translate-x-full'
                     } bg-white dark:bg-gray-800`}
                     tabIndex="-1"
@@ -328,7 +392,7 @@ export default function Profile() {
                     >
                         Update Product
                     </h5>
-                    <form onSubmit={(e) => submitFormProfilePassword(e)}>
+                    <form onSubmit={(e) => submitFormProfile(e)}>
                         <div className="space-y-4">
                             <div>
                                 <div>
@@ -362,8 +426,8 @@ export default function Profile() {
                                     type="text"
                                     name="fnameUpdate"
                                     id="fnameUpdate"
-                                    defaultValue="Nureka"
-                                    placeholder="Nureka"
+                                    defaultValue={student?.first_name}
+                                    placeholder="-"
                                     required=""
                                 />
                             </div>
@@ -378,8 +442,8 @@ export default function Profile() {
                                     type="text"
                                     name="lnameUpdate"
                                     id="lnameUpdate"
-                                    defaultValue="Rodrigo"
-                                    placeholder="Rodrigo"
+                                    defaultValue={student?.last_name}
+                                    placeholder="-"
                                     required=""
                                 />
                             </div>
@@ -391,12 +455,28 @@ export default function Profile() {
                                     Mobile No.
                                 </label>
                                 <TextInput
-                                    type="number"
+                                    type="text"
                                     name="telUpdate"
                                     id="telUpdate"
-                                    defaultValue="0767579998"
-                                    placeholder="0767579998"
+                                    defaultValue={student?.tel}
+                                    placeholder="-"
                                     required=""
+                                />
+                            </div>
+                            <div>
+                                <label
+                                        htmlFor="dob"
+                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                >
+                                    Date of Birth
+                                </label>
+                                <TextInput
+                                        type="text"
+                                        name="dob"
+                                        id="dob"
+                                        defaultValue={student?.dob}
+                                        placeholder="-"
+                                        required=""
                                 />
                             </div>
                             <div className="sm:col-span-2">
@@ -410,13 +490,13 @@ export default function Profile() {
                                     id="bioUpdate"
                                     name="bioUpdate"
                                     rows="8"
-                                    defaultValue="I am passionate about exploring the vast world of technology and its applications. With a strong foundation in computer networks, programming, algorithms, and problem-solving, I am eager to contribute my skills and learn from experienced professionals in the field."
-                                    placeholder="Write a biography here..."
+                                    defaultValue={student?.description}
+                                    placeholder="-"
                                 ></Textarea>
                             </div>
                         </div>
                         <div
-                            className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 sm:absolute sm:px-4 sm:mt-0">
+                            className="bottom-0 left-0 flex justify-center w-full pb-4 mt-4 space-x-4 pt-3 sm:px-4 sm:mt-0">
                             <button
                                 type="submit"
                                 className="w-full justify-center text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
@@ -425,8 +505,6 @@ export default function Profile() {
                             </button>
                             <button
                                 type="button"
-                                data-drawer-dismiss="profile-update"
-                                aria-controls="profile-update"
                                 className="w-full justify-center text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                                 onClick={closeProfileDrawer}
                             >
@@ -450,7 +528,6 @@ export default function Profile() {
                 </div>
 
                 <div
-                    id="password-update"
                     className={`fixed top-0 left-0 z-40 w-full h-screen max-w-xs p-4 overflow-y-auto transition-transform ${
                         isPasswordDrawerOpen ? '' : '-translate-x-full'
                     } bg-white dark:bg-gray-800`}
@@ -534,8 +611,6 @@ export default function Profile() {
                             </button>
                             <button
                                 type="button"
-                                data-drawer-dismiss="password-update"
-                                aria-controls="password-update"
                                 className="w-full justify-center text-red-600 inline-flex items-center hover:text-white border border-red-600 hover:bg-red-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900"
                                 onClick={closePasswordDrawer}
                             >
