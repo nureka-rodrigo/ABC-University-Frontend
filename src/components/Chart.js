@@ -5,14 +5,14 @@ export default function SemesterChart() {
 
     useEffect(() => {
         const data = [
-            { semester: 1, gpa: 3.96 },
-            { semester: 2, gpa: 3.80 },
-            { semester: 3, gpa: 3.79 },
-            { semester: 4, gpa: null },
-            { semester: 5, gpa: null },
-            { semester: 6, gpa: null },
-            { semester: 7, gpa: null },
-            { semester: 8, gpa: null },
+            {semester: 1, gpa: 3.96},
+            {semester: 2, gpa: 3.80},
+            {semester: 3, gpa: 3.79},
+            {semester: 4, gpa: null},
+            {semester: 5, gpa: null},
+            {semester: 6, gpa: null},
+            {semester: 7, gpa: null},
+            {semester: 8, gpa: null},
         ];
 
         let myChart = new Chart(document.getElementById("semester"), {

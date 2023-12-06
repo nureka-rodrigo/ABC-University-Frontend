@@ -18,9 +18,9 @@ export default function SidebarStudent() {
     let pathArray = useLocation().pathname.split("/");
     let lastPart = pathArray[pathArray.length - 1];
     const [isLoading, setIsLoading] = useState(false);
-    const token = Cookies.get('token', { path: '/' });
+    const token = Cookies.get('token', {path: '/'});
 
-    if(!token){
+    if (!token) {
         window.location.href = "/";
     }
 
@@ -31,12 +31,12 @@ export default function SidebarStudent() {
         axios.post("http://127.0.0.1:8000/api/logout/", "", {
             headers: {
                 'authorization': `Token ${token}`,
-                'Accept' : 'application/json',
+                'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         })
             .then(response => {
-                Cookies.remove('token', { path: '/' });
+                Cookies.remove('token', {path: '/'});
                 setIsLoading(false);
                 window.location.href = "/";
             })
@@ -57,9 +57,10 @@ export default function SidebarStudent() {
 
     return (
         <>
-            <PrivateRoute />
-            {isLoading && <LoadingSpinner />}
-            <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+            <PrivateRoute/>
+            {isLoading && <LoadingSpinner/>}
+            <nav
+                className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                 <div className="px-3 py-3 lg:px-5 lg:pl-3">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center justify-start rtl:justify-end">
@@ -83,7 +84,8 @@ export default function SidebarStudent() {
                                     className="h-8 me-3"
                                     alt="FlowBite Logo"
                                 />
-                                <span className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
+                                <span
+                                    className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
                   ABC University
                 </span>
                             </Link>
@@ -106,7 +108,8 @@ export default function SidebarStudent() {
                             <div className="flex flex-col items-center">
                                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={ImageStudent}
                                      alt="student"/>
-                                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Nureka Rodrigo</h5>
+                                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Nureka
+                                    Rodrigo</h5>
                                 <span className="text-sm text-gray-500 dark:text-gray-400">Student</span>
                             </div>
                         </li>
@@ -189,7 +192,7 @@ export default function SidebarStudent() {
                         <li className="py-3">
                             <button
                                 className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                                onClick={()=>signout()}
+                                onClick={() => signout()}
                             >
                                 Sign Out
                             </button>

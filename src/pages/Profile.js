@@ -77,9 +77,9 @@ export default function Profile() {
         if (file.size > 2048000) {
             setFileError("MAX FILE size is 2MB!");
         } else if (
-                fileExtension !== "png" &&
-                fileExtension !== "jpg" &&
-                fileExtension !== "svg"
+            fileExtension !== "png" &&
+            fileExtension !== "jpg" &&
+            fileExtension !== "svg"
         ) {
             setFileError("Only SVG, JPG, JPEG and PNG are allowed!");
         } else {
@@ -119,24 +119,24 @@ export default function Profile() {
             setIsLoading(true);
 
             axios
-                    .post(`http://127.0.0.1:8000/api/user/change_password/`, formData, {
-                        ...TokenHeader
-                    })
-                    .then((response) => {
-                        if (response.status === 200) {
-                            toast.success('Password updated successfully', {
-                                ...ToastSettings
-                            });
-                            setIsPasswordDrawerOpen(false);
-                            setIsLoading(false);
-                        }
-                    })
-                    .catch(() => {
-                        toast.error('An error occurred!', {
+                .post(`http://127.0.0.1:8000/api/user/change_password/`, formData, {
+                    ...TokenHeader
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        toast.success('Password updated successfully', {
                             ...ToastSettings
                         });
+                        setIsPasswordDrawerOpen(false);
                         setIsLoading(false);
+                    }
+                })
+                .catch(() => {
+                    toast.error('An error occurred!', {
+                        ...ToastSettings
                     });
+                    setIsLoading(false);
+                });
         }
     }
 
@@ -147,58 +147,58 @@ export default function Profile() {
         if (fileError === null) {
             setIsLoading(true);
             axios
-                    .post(`http://127.0.0.1:8000/api/user/student/`, formData, {
-                        ...TokenHeader
-                    })
-                    .then((response) => {
-                        if (response.status === 200) {
-                            setStudent(response.data);
-                            toast.success('Profile updated successfully', {
-                                ...ToastSettings
-                            });
-                            setIsProfileDrawerOpen(false);
-                            setIsLoading(false);
-                            console.log(response.data);
-                        }
-                        getStudentDetails();
-                    })
-                    .catch(() => {
-                        toast.error('An error occurred!', {
+                .post(`http://127.0.0.1:8000/api/user/student/`, formData, {
+                    ...TokenHeader
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        setStudent(response.data);
+                        toast.success('Profile updated successfully', {
                             ...ToastSettings
                         });
+                        setIsProfileDrawerOpen(false);
                         setIsLoading(false);
+                        console.log(response.data);
+                    }
+                    getStudentDetails();
+                })
+                .catch(() => {
+                    toast.error('An error occurred!', {
+                        ...ToastSettings
                     });
+                    setIsLoading(false);
+                });
         }
     }
 
     const getStudentDetails = useCallback(() => {
         setIsLoading(true);
         axios
-                .post(`http://127.0.0.1:8000/api/user/student/`, "",{
-                    ...TokenHeader
-                })
-                .then((response) => {
-                    if (response.status === 200) {
-                        setStudent(response.data);
-                        setIsLoading(false);
-                    }
-                })
-                .catch(() => {
-                    toast.error('Error loading data!', {
-                        ...ToastSettings
-                    });
+            .post(`http://127.0.0.1:8000/api/user/student/`, "", {
+                ...TokenHeader
+            })
+            .then((response) => {
+                if (response.status === 200) {
+                    setStudent(response.data);
                     setIsLoading(false);
+                }
+            })
+            .catch(() => {
+                toast.error('Error loading data!', {
+                    ...ToastSettings
                 });
-    },[setIsLoading])
+                setIsLoading(false);
+            });
+    }, [setIsLoading])
 
-    useEffect(()=>{
+    useEffect(() => {
         getStudentDetails()
-    },[getStudentDetails])
+    }, [getStudentDetails])
 
     return (
         <>
             <SidebarStudent/>
-            {isLoading && <LoadingSpinner />}
+            {isLoading && <LoadingSpinner/>}
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <section className="bg-white dark:bg-gray-900">
                     <div className="max-w-2xl px-4 py-8 mx-auto lg:py-16">
@@ -465,18 +465,18 @@ export default function Profile() {
                             </div>
                             <div>
                                 <label
-                                        htmlFor="dob"
-                                        className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                                    htmlFor="dob"
+                                    className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
                                     Date of Birth
                                 </label>
                                 <TextInput
-                                        type="text"
-                                        name="dob"
-                                        id="dob"
-                                        defaultValue={student?.dob}
-                                        placeholder="-"
-                                        required=""
+                                    type="text"
+                                    name="dob"
+                                    id="dob"
+                                    defaultValue={student?.dob}
+                                    placeholder="-"
+                                    required=""
                                 />
                             </div>
                             <div className="sm:col-span-2">
