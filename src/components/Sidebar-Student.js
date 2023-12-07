@@ -7,17 +7,20 @@ import ThemeToggler from "./Theme-Toggler";
 import Logo from "../logo.svg";
 import ImageStudent from "../assests/img/people/students/Nureka.jpg";
 import LoadingSpinner from "./Loading-Spinner";
-import React, {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {toast} from "react-toastify";
 import PrivateRoute from "./Private-Route";
+import {TokenHeader} from "../data/TokenHeader";
+import {ToastSettings} from "../data/ToastSettings";
 
 export default function SidebarStudent() {
 
     let pathArray = useLocation().pathname.split("/");
     let lastPart = pathArray[pathArray.length - 1];
     const [isLoading, setIsLoading] = useState(false);
+    const [student, setStudent] = useState([null]);
     const token = Cookies.get('token', {path: '/'});
 
     if (!token) {
@@ -55,6 +58,30 @@ export default function SidebarStudent() {
             });
     }
 
+    const getStudentDetails = useCallback(() => {
+        setIsLoading(true);
+        axios
+            .post(`http://127.0.0.1:8000/api/user/student/`, "", {
+                ...TokenHeader
+            })
+            .then((response) => {
+                if (response.status === 200) {
+                    setStudent(response.data);
+                    setIsLoading(false);
+                }
+            })
+            .catch(() => {
+                toast.error('Error loading data!', {
+                    ...ToastSettings
+                });
+                setIsLoading(false);
+            });
+    }, [setIsLoading])
+
+    useEffect(() => {
+        getStudentDetails()
+    }, [getStudentDetails])
+
     return (
         <>
             <PrivateRoute/>
@@ -82,7 +109,7 @@ export default function SidebarStudent() {
                                 <img
                                     src={Logo}
                                     className="h-8 me-3"
-                                    alt="FlowBite Logo"
+                                    alt="University Logo"
                                 />
                                 <span
                                     className="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">
@@ -108,8 +135,7 @@ export default function SidebarStudent() {
                             <div className="flex flex-col items-center">
                                 <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={ImageStudent}
                                      alt="student"/>
-                                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">Nureka
-                                    Rodrigo</h5>
+                                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{student?.first_name + " " + student?.last_name}</h5>
                                 <span className="text-sm text-gray-500 dark:text-gray-400">Student</span>
                             </div>
                         </li>

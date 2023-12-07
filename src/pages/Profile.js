@@ -119,7 +119,7 @@ export default function Profile() {
             setIsLoading(true);
 
             axios
-                .post(`http://127.0.0.1:8000/api/user/change_password/`, formData, {
+                .post(`http://127.0.0.1:8000/api/user/update_password/`, formData, {
                     ...TokenHeader
                 })
                 .then((response) => {
@@ -131,8 +131,8 @@ export default function Profile() {
                         setIsLoading(false);
                     }
                 })
-                .catch(() => {
-                    toast.error('An error occurred!', {
+                .catch((error) => {
+                    toast.error('Current password is incorrect!', {
                         ...ToastSettings
                     });
                     setIsLoading(false);
@@ -147,7 +147,7 @@ export default function Profile() {
         if (fileError === null) {
             setIsLoading(true);
             axios
-                .post(`http://127.0.0.1:8000/api/user/student/`, formData, {
+                .post(`http://127.0.0.1:8000/api/user/update_profile/`, formData, {
                     ...TokenHeader
                 })
                 .then((response) => {
@@ -390,7 +390,7 @@ export default function Profile() {
                         id="drawer-label"
                         className="inline-flex items-center mb-6 text-sm font-semibold text-gray-500 uppercase dark:text-gray-400"
                     >
-                        Update Product
+                        Update Profile
                     </h5>
                     <form onSubmit={(e) => submitFormProfile(e)}>
                         <div className="space-y-4">
@@ -465,15 +465,15 @@ export default function Profile() {
                             </div>
                             <div>
                                 <label
-                                    htmlFor="dob"
+                                    htmlFor="dobUpdate"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
                                     Date of Birth
                                 </label>
                                 <TextInput
                                     type="text"
-                                    name="dob"
-                                    id="dob"
+                                    name="dobUpdate"
+                                    id="dobUpdate"
                                     defaultValue={student?.dob}
                                     placeholder="-"
                                     required=""
