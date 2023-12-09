@@ -147,7 +147,7 @@ export default function Profile() {
         if (fileError === null) {
             setIsLoading(true);
             axios
-                .post(`http://127.0.0.1:8000/api/user/update_profile/`, formData, {
+                .put(`http://127.0.0.1:8000/api/user/update_profile/`, formData, {
                     ...TokenHeader
                 })
                 .then((response) => {
@@ -344,14 +344,14 @@ export default function Profile() {
                             </div>
                             <div className="sm:col-span-2">
                                 <label
-                                    htmlFor="bio"
+                                    htmlFor="description"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
                                     Description
                                 </label>
                                 <Textarea
-                                    id="bio"
-                                    name="bio"
+                                    id="description"
+                                    name="description"
                                     rows="8"
                                     defaultValue={student?.description}
                                     placeholder="-"
@@ -427,7 +427,7 @@ export default function Profile() {
                                     name="fnameUpdate"
                                     id="fnameUpdate"
                                     defaultValue={student?.first_name}
-                                    placeholder="-"
+                                    placeholder={student?.first_name}
                                     required=""
                                 />
                             </div>
@@ -443,7 +443,7 @@ export default function Profile() {
                                     name="lnameUpdate"
                                     id="lnameUpdate"
                                     defaultValue={student?.last_name}
-                                    placeholder="-"
+                                    placeholder={student?.last_name}
                                     required=""
                                 />
                             </div>
@@ -459,7 +459,7 @@ export default function Profile() {
                                     name="telUpdate"
                                     id="telUpdate"
                                     defaultValue={student?.tel}
-                                    placeholder="-"
+                                    placeholder={student?.tel}
                                     required=""
                                 />
                             </div>
@@ -475,23 +475,23 @@ export default function Profile() {
                                     name="dobUpdate"
                                     id="dobUpdate"
                                     defaultValue={student?.dob}
-                                    placeholder="-"
+                                    placeholder={student?.dob}
                                     required=""
                                 />
                             </div>
                             <div className="sm:col-span-2">
                                 <label
-                                    htmlFor="bioUpdate"
+                                    htmlFor="descriptionUpdate"
                                     className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                                 >
                                     Description
                                 </label>
                                 <Textarea
-                                    id="bioUpdate"
-                                    name="bioUpdate"
+                                    id="descriptionUpdate"
+                                    name="descriptionUpdate"
                                     rows="8"
                                     defaultValue={student?.description}
-                                    placeholder="-"
+                                    placeholder={student?.description}
                                 ></Textarea>
                             </div>
                         </div>
