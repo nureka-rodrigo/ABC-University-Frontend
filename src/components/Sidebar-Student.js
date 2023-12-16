@@ -31,11 +31,7 @@ export default function SidebarStudent() {
         setIsLoading(true);
 
         axios.post("http://127.0.0.1:8000/api/logout/", "", {
-            headers: {
-                'authorization': `Token ${token}`,
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
+            ...TokenHeader
         })
             .then(response => {
                 Cookies.remove('token', {path: '/'});

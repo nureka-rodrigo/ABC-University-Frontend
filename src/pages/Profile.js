@@ -7,7 +7,7 @@ import {toast} from "react-toastify";
 import LoadingSpinner from "../components/Loading-Spinner";
 import {ToastSettings} from "../data/ToastSettings";
 import {TokenHeader} from "../data/TokenHeader";
-import Cookies from "js-cookie";
+import {TokenHeaderMultipart} from "../data/TokenHeaderMultipart";
 
 export default function Profile() {
     const [currentPasswordError, setCurrentPasswordError] = useState(null);
@@ -149,11 +149,7 @@ export default function Profile() {
             setIsLoading(true);
             axios
                 .put(`http://127.0.0.1:8000/api/user/update_profile/`, formData, {
-                    headers: {
-                        'authorization': `Token ${Cookies.get('token', {path: '/'})}`,
-                        'Accept' : 'application/json',
-                        'Content-Type': 'multipart/form-data'
-                    }
+                    ...TokenHeaderMultipart
                 })
                 .then((response) => {
                     if (response.status === 200) {
