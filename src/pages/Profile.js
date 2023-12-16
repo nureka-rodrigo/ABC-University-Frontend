@@ -163,7 +163,6 @@ export default function Profile() {
                         });
                         setIsProfileDrawerOpen(false);
                         setIsLoading(false);
-                        console.log(response.data);
                     }
                     getStudentDetails();
                 })
