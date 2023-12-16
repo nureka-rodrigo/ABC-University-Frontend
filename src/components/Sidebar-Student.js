@@ -5,7 +5,6 @@ import {BsGraphUp} from "react-icons/bs";
 import {Link, useLocation} from "react-router-dom";
 import ThemeToggler from "./Theme-Toggler";
 import Logo from "../logo.svg";
-import ImageStudent from "../assests/img/people/students/Nureka.jpg";
 import LoadingSpinner from "./Loading-Spinner";
 import React, {useCallback, useEffect, useState} from "react";
 import axios from "axios";
@@ -82,6 +81,14 @@ export default function SidebarStudent() {
         getStudentDetails()
     }, [getStudentDetails])
 
+    const getImageSrc = () => {
+        if (student && student.image) {
+            const imageFormat = student.image.split(';')[0].split('/')[1];
+            return `data:image/${imageFormat};base64,${student.image}`;
+        }
+        return '';
+    };
+
     return (
         <>
             <PrivateRoute/>
@@ -118,7 +125,7 @@ export default function SidebarStudent() {
                             </Link>
                         </div>
                         <div className="flex items-center lg:order-2">
-                            <ThemeToggler></ThemeToggler>
+                            <ThemeToggler/>
                         </div>
                     </div>
                 </div>
@@ -133,9 +140,8 @@ export default function SidebarStudent() {
                     <ul className="space-y-2 font-medium">
                         <li className="flex items-center pt-3 pb-5 pl-10 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <div className="flex flex-col items-center">
-                                <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={ImageStudent}
-                                     alt="student"/>
-                                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{student?.first_name + " " + student?.last_name}</h5>
+                                <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={getImageSrc()} alt="student profile"/>
+                                <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{`${student?.first_name} ${student?.last_name}`}</h5>
                                 <span className="text-sm text-gray-500 dark:text-gray-400">Student</span>
                             </div>
                         </li>

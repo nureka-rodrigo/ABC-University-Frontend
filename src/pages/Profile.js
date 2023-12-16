@@ -7,6 +7,7 @@ import {toast} from "react-toastify";
 import LoadingSpinner from "../components/Loading-Spinner";
 import {ToastSettings} from "../data/ToastSettings";
 import {TokenHeader} from "../data/TokenHeader";
+import Cookies from "js-cookie";
 
 export default function Profile() {
     const [currentPasswordError, setCurrentPasswordError] = useState(null);
@@ -148,7 +149,11 @@ export default function Profile() {
             setIsLoading(true);
             axios
                 .put(`http://127.0.0.1:8000/api/user/update_profile/`, formData, {
-                    ...TokenHeader
+                    headers: {
+                        'authorization': `Token ${Cookies.get('token', {path: '/'})}`,
+                        'Accept' : 'application/json',
+                        'Content-Type': 'multipart/form-data'
+                    }
                 })
                 .then((response) => {
                     if (response.status === 200) {
@@ -405,6 +410,7 @@ export default function Profile() {
                                 </div>
                                 <FileInput
                                     id="file-upload"
+                                    name="file-upload"
                                     helperText={
                                         fileError ? (
                                             <span className="text-red-500">{fileError}</span>
