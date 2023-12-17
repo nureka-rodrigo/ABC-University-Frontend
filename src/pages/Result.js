@@ -3,8 +3,6 @@ import {Select, Table} from "flowbite-react";
 import Footer from "../components/Footer";
 import axios from "axios";
 import {TokenHeader} from "../data/TokenHeader";
-import {toast} from "react-toastify";
-import {ToastSettings} from "../data/ToastSettings";
 import React, {useCallback, useEffect, useState} from "react";
 import LoadingSpinner from "../components/Loading-Spinner";
 
@@ -30,10 +28,11 @@ export default function Result() {
                     setIsLoading(false)
                 }
             })
-            .catch(() => {
-                toast.error('Error loading data!', {
-                    ...ToastSettings
-                });
+            .catch((error) => {
+                console.log(error)
+                // toast.error('Error loading data!', {
+                //     ...ToastSettings
+                // });
                 setIsLoading(false)
             })
     }, [setIsLoading])

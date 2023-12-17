@@ -21,13 +21,11 @@ export default function SidebarStudent() {
     const token = Cookies.get('token', {path: '/'});
     const {student, isLoading, setIsLoading} = useStudent()
 
-
     if (!token) {
         window.location.href = "/";
     }
 
     function signout() {
-
         setIsLoading(true);
 
         axios.post("http://127.0.0.1:8000/api/logout/", "", {
@@ -54,13 +52,13 @@ export default function SidebarStudent() {
     }
 
     const getImageSrc = useCallback(() => {
+        console.log(student)
         if (student && student.image) {
             const imageFormat = student.image.split(';')[0].split('/')[1];
             return `data:image/${imageFormat};base64,${student.image}`;
         }
         return '';
     }, [student]);
-
 
     return (
         <>

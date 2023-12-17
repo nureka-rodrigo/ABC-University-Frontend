@@ -133,10 +133,11 @@ export default function Profile() {
                         setIsLoading(false);
                     }
                 })
-                .catch(() => {
-                    toast.error('Current password is incorrect!', {
-                        ...ToastSettings
-                    });
+                .catch((error) => {
+                    console.log(error)
+                    // toast.error('Current password is incorrect!', {
+                    //     ...ToastSettings
+                    // });
                     setIsLoading(false);
                 });
         }

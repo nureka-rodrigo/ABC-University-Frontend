@@ -1,8 +1,6 @@
 import {createContext, useCallback, useContext, useState} from "react";
 import axios from "axios";
 import {TokenHeader} from "../data/TokenHeader";
-import {toast} from "react-toastify";
-import {ToastSettings} from "../data/ToastSettings";
 
 const StudentContext = createContext();
 
@@ -22,10 +20,11 @@ const StudentProvider = ({ children }) => {
                     setIsLoading(false);
                 }
             })
-            .catch(() => {
-                toast.error('Error loading data!', {
-                    ...ToastSettings
-                });
+            .catch((error) => {
+                console.log(error)
+                // toast.error('Error loading data!', {
+                //     ...ToastSettings
+                // });
                 setIsLoading(false);
             });
     }, [setIsLoading])
