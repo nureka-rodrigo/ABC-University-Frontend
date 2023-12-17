@@ -1,6 +1,6 @@
 import SidebarStudent from "../components/Sidebar-Student";
 import Footer from "../components/Footer";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useState} from "react";
 import {FileInput, Textarea, TextInput} from "flowbite-react";
 import axios from "axios";
 import {toast} from "react-toastify";
@@ -8,6 +8,7 @@ import LoadingSpinner from "../components/Loading-Spinner";
 import {ToastSettings} from "../data/ToastSettings";
 import {TokenHeader} from "../data/TokenHeader";
 import {TokenHeaderMultipart} from "../data/TokenHeaderMultipart";
+import {useStudent} from "../hooks/StudentContext";
 
 export default function Profile() {
     const [currentPasswordError, setCurrentPasswordError] = useState(null);
@@ -17,8 +18,8 @@ export default function Profile() {
     const [fileError, setFileError] = useState(null);
     const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
     const [isPasswordDrawerOpen, setIsPasswordDrawerOpen] = useState(false);
-    const [student, setStudent] = useState([null]);
-    const [isLoading, setIsLoading] = useState(false);
+    const {student, setStudent, isLoading, setIsLoading, getStudentDetails} = useStudent()
+
 
     const openProfileDrawer = () => {
         setIsProfileDrawerOpen(true);
@@ -132,7 +133,7 @@ export default function Profile() {
                         setIsLoading(false);
                     }
                 })
-                .catch((error) => {
+                .catch(() => {
                     toast.error('Current password is incorrect!', {
                         ...ToastSettings
                     });
@@ -170,30 +171,6 @@ export default function Profile() {
                 });
         }
     }
-
-    const getStudentDetails = useCallback(() => {
-        setIsLoading(true);
-        axios
-            .post(`http://127.0.0.1:8000/api/user/student/`, "", {
-                ...TokenHeader
-            })
-            .then((response) => {
-                if (response.status === 200) {
-                    setStudent(response.data);
-                    setIsLoading(false);
-                }
-            })
-            .catch(() => {
-                toast.error('Error loading data!', {
-                    ...ToastSettings
-                });
-                setIsLoading(false);
-            });
-    }, [setIsLoading])
-
-    useEffect(() => {
-        getStudentDetails()
-    }, [getStudentDetails])
 
     return (
         <>

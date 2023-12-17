@@ -6,21 +6,21 @@ import {Link, useLocation} from "react-router-dom";
 import ThemeToggler from "./Theme-Toggler";
 import Logo from "../logo.svg";
 import LoadingSpinner from "./Loading-Spinner";
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useCallback} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {toast} from "react-toastify";
 import PrivateRoute from "./Private-Route";
 import {TokenHeader} from "../data/TokenHeader";
-import {ToastSettings} from "../data/ToastSettings";
+import {useStudent} from "../hooks/StudentContext";
 
 export default function SidebarStudent() {
 
     let pathArray = useLocation().pathname.split("/");
     let lastPart = pathArray[pathArray.length - 1];
-    const [isLoading, setIsLoading] = useState(false);
-    const [student, setStudent] = useState([null]);
     const token = Cookies.get('token', {path: '/'});
+    const {student, isLoading, setIsLoading} = useStudent()
+
 
     if (!token) {
         window.location.href = "/";
@@ -53,37 +53,14 @@ export default function SidebarStudent() {
             });
     }
 
-    const getStudentDetails = useCallback(() => {
-        setIsLoading(true);
-        axios
-            .post(`http://127.0.0.1:8000/api/user/student/`, "", {
-                ...TokenHeader
-            })
-            .then((response) => {
-                if (response.status === 200) {
-                    setStudent(response.data);
-                    setIsLoading(false);
-                }
-            })
-            .catch(() => {
-                toast.error('Error loading data!', {
-                    ...ToastSettings
-                });
-                setIsLoading(false);
-            });
-    }, [setIsLoading])
-
-    useEffect(() => {
-        getStudentDetails()
-    }, [getStudentDetails])
-
-    const getImageSrc = () => {
+    const getImageSrc = useCallback(() => {
         if (student && student.image) {
             const imageFormat = student.image.split(';')[0].split('/')[1];
             return `data:image/${imageFormat};base64,${student.image}`;
         }
         return '';
-    };
+    }, [student]);
+
 
     return (
         <>
@@ -136,7 +113,8 @@ export default function SidebarStudent() {
                     <ul className="space-y-2 font-medium">
                         <li className="flex items-center pt-3 pb-5 pl-10 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                             <div className="flex flex-col items-center">
-                                <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={getImageSrc()} alt="student profile"/>
+                                <img className="w-24 h-24 mb-3 rounded-full shadow-lg" src={getImageSrc()}
+                                     alt="student profile"/>
                                 <h5 className="mb-1 text-xl font-medium text-gray-900 dark:text-white">{`${student?.first_name} ${student?.last_name}`}</h5>
                                 <span className="text-sm text-gray-500 dark:text-gray-400">Student</span>
                             </div>

@@ -13,6 +13,7 @@ import {ToastContainer} from "react-toastify";
 import PrivateRoute from "./components/Private-Route";
 import AnonymousRoute from "./components/Anonymous-Route";
 import axios from "axios";
+import StudentProvider from "./hooks/StudentContext";
 
 export default function App() {
 
@@ -32,22 +33,24 @@ export default function App() {
                     <LoadingSpinner/>
                 }
             >
-                <Routes>
-                    <Route element={<PrivateRoute/>}>
-                        <Route path={"/dashboard"} element={<Dashboard/>}/>
-                        <Route path={"/profile"} element={<Profile/>}/>
-                        <Route path={"/courses"} element={<Courses/>}/>
-                        <Route path={"/result"} element={<Result/>}/>
-                        <Route path={"/feedback"} element={<Feedback/>}/>
-                        <Route path={"/test"} element={<Test/>}/>
-                        <Route path={"*"} element={<ErrorPage/>}/>
-                    </Route>
-                    <Route element={<AnonymousRoute/>}>
-                        <Route path={"/"} element={<Signin/>}/>
-                        <Route path={"/test"} element={<Test/>}/>
-                        <Route path={"*"} element={<ErrorPage/>}/>
-                    </Route>
-                </Routes>
+                <StudentProvider>
+                    <Routes>
+                        <Route element={<PrivateRoute/>}>
+                            <Route path={"/dashboard"} element={<Dashboard/>}/>
+                            <Route path={"/profile"} element={<Profile/>}/>
+                            <Route path={"/courses"} element={<Courses/>}/>
+                            <Route path={"/result"} element={<Result/>}/>
+                            <Route path={"/feedback"} element={<Feedback/>}/>
+                            <Route path={"/test"} element={<Test/>}/>
+                            <Route path={"*"} element={<ErrorPage/>}/>
+                        </Route>
+                        <Route element={<AnonymousRoute/>}>
+                            <Route path={"/"} element={<Signin/>}/>
+                            <Route path={"/test"} element={<Test/>}/>
+                            <Route path={"*"} element={<ErrorPage/>}/>
+                        </Route>
+                    </Routes>
+                </StudentProvider>
             </Suspense>
         </>
     );
