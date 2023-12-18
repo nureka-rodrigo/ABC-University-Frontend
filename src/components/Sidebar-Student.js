@@ -1,24 +1,24 @@
-import "flowbite";
-import {HiMenuAlt2} from "react-icons/hi";
-import {FaBookmark, FaCommentAlt, FaHome, FaUser} from "react-icons/fa";
-import {BsGraphUp} from "react-icons/bs";
-import {Link, useLocation} from "react-router-dom";
-import ThemeToggler from "./Theme-Toggler";
-import Logo from "../logo.svg";
-import LoadingSpinner from "./Loading-Spinner";
-import React, {useCallback, useEffect} from "react";
-import axios from "axios";
-import Cookies from "js-cookie";
-import {toast} from "react-toastify";
-import PrivateRoute from "./Private-Route";
-import {TokenHeader} from "../data/TokenHeader";
-import {useStudent} from "../hooks/StudentContext";
+import "flowbite"
+import {HiMenuAlt2} from "react-icons/hi"
+import {FaBookmark, FaCommentAlt, FaHome, FaUser} from "react-icons/fa"
+import {BsGraphUp} from "react-icons/bs"
+import {Link, useLocation} from "react-router-dom"
+import ThemeToggler from "./Theme-Toggler"
+import Logo from "../logo.svg"
+import LoadingSpinner from "./Loading-Spinner"
+import React, {useCallback, useEffect} from "react"
+import axios from "axios"
+import Cookies from "js-cookie"
+import {toast} from "react-toastify"
+import PrivateRoute from "./Private-Route"
+import {TokenHeader} from "../data/TokenHeader"
+import {useStudent} from "../hooks/StudentContext"
 
 export default function SidebarStudent() {
 
-    let pathArray = useLocation().pathname.split("/");
-    let lastPart = pathArray[pathArray.length - 1];
-    const token = Cookies.get('token', {path: '/'});
+    let pathArray = useLocation().pathname.split("/")
+    let lastPart = pathArray[pathArray.length - 1]
+    const token = Cookies.get('token', {path: '/'})
     const {student, isLoading, setIsLoading, getStudentDetails} = useStudent()
 
     useEffect(() => {
@@ -26,19 +26,19 @@ export default function SidebarStudent() {
     }, [getStudentDetails])
 
     if (!token) {
-        window.location.href = "/";
+        window.location.href = "/"
     }
 
     function signout() {
-        setIsLoading(true);
+        setIsLoading(true)
 
         axios.post("http://127.0.0.1:8000/api/logout/", "", {
             ...TokenHeader
         })
             .then(response => {
-                Cookies.remove('token', {path: '/'});
-                setIsLoading(false);
-                window.location.href = "/";
+                Cookies.remove('token', {path: '/'})
+                setIsLoading(false)
+                window.location.href = "/"
             })
             .catch((error) => {
                 toast.error('' + error, {
@@ -50,18 +50,18 @@ export default function SidebarStudent() {
                     draggable: true,
                     progress: undefined,
                     theme: "dark",
-                });
-                setIsLoading(false);
-            });
+                })
+                setIsLoading(false)
+            })
     }
 
     const getImageSrc = useCallback(() => {
         if (student && student.image) {
-            const imageFormat = student.image.split(';')[0].split('/')[1];
-            return `data:image/${imageFormat};base64,${student.image}`;
+            const imageFormat = student.image.split(';')[0].split('/')[1]
+            return `data:image/${imageFormat};base64,${student.image}`
         }
-        return '';
-    }, [student]);
+        return ''
+    }, [student])
 
     return (
         <>
@@ -208,5 +208,5 @@ export default function SidebarStudent() {
                 </div>
             </aside>
         </>
-    );
+    )
 }

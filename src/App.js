@@ -1,25 +1,25 @@
-import React, {Suspense} from "react";
-import {Route, Routes} from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
-import Courses from "./pages/Courses";
-import Result from "./pages/Result";
-import Feedback from "./pages/Feedback";
-import ErrorPage from "./pages/404";
-import Signin from "./pages/Signin";
-import LoadingSpinner from "./components/Loading-Spinner";
-import {ToastContainer} from "react-toastify";
-import PrivateRoute from "./components/Private-Route";
-import AnonymousRoute from "./components/Anonymous-Route";
-import axios from "axios";
-import StudentProvider from "./hooks/StudentContext";
+import React, {Suspense} from "react"
+import {Route, Routes} from "react-router-dom"
+import Dashboard from "./pages/Dashboard"
+import Profile from "./pages/Profile"
+import Courses from "./pages/Courses"
+import Result from "./pages/Result"
+import Feedback from "./pages/Feedback"
+import ErrorPage from "./pages/404"
+import Signin from "./pages/Signin"
+import LoadingSpinner from "./components/Loading-Spinner"
+import {ToastContainer} from "react-toastify"
+import PrivateRoute from "./components/Private-Route"
+import AnonymousRoute from "./components/Anonymous-Route"
+import axios from "axios"
+import StudentProvider from "./hooks/StudentContext"
 
 export default function App() {
 
-    axios.defaults.withCredentials = true;
+    axios.defaults.withCredentials = true
 
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
+        document.documentElement.classList.add('dark')
     } else {
         document.documentElement.classList.remove('dark')
     }
@@ -50,5 +50,5 @@ export default function App() {
                 </StudentProvider>
             </Suspense>
         </>
-    );
+    )
 }

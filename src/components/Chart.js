@@ -1,5 +1,5 @@
-import Chart from "chart.js/auto";
-import {useEffect} from "react";
+import Chart from "chart.js/auto"
+import {useEffect} from "react"
 
 export default function SemesterChart() {
 
@@ -13,7 +13,7 @@ export default function SemesterChart() {
             {semester: 6, gpa: null},
             {semester: 7, gpa: null},
             {semester: 8, gpa: null},
-        ];
+        ]
 
         let myChart = new Chart(document.getElementById("semester"), {
             type: "line",
@@ -24,18 +24,18 @@ export default function SemesterChart() {
                         label: "GPA by semester",
                         data: data.map((row) => row.gpa),
                         borderColor: '#6366f1',
-                    },
+                    }
                 ],
             },
             options: {
                 maintainAspectRatio: false,
                 responsive: true,
             },
-        });
+        })
         return () => {
-            myChart.destroy();
-        };
-    }, []);
+            myChart.destroy()
+        }
+    }, [])
 
     return (
         <>
@@ -43,5 +43,5 @@ export default function SemesterChart() {
                 <canvas id="semester"></canvas>
             </div>
         </>
-    );
+    )
 }

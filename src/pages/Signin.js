@@ -1,77 +1,77 @@
-import React, {useState} from "react";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import LoadingSpinner from "../components/Loading-Spinner";
-import {Label, TextInput} from "flowbite-react";
-import {toast} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
-import Cookies from 'js-cookie';
-import {ToastSettings} from "../data/ToastSettings";
+import React, {useState} from "react"
+import Footer from "../components/Footer"
+import Header from "../components/Header"
+import LoadingSpinner from "../components/Loading-Spinner"
+import {Label, TextInput} from "flowbite-react"
+import {toast} from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import axios from "axios"
+import Cookies from 'js-cookie'
+import {ToastSettings} from "../data/ToastSettings"
 
 export default function Signin() {
-    const [usernameError, setUsernameError] = useState(null);
-    const [passwordError, setPasswordError] = useState(null);
-    const [isChecked, setIsChecked] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [usernameError, setUsernameError] = useState(null)
+    const [passwordError, setPasswordError] = useState(null)
+    const [isChecked, setIsChecked] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     function validateUsername(e) {
-        const data = e.target.value;
+        const data = e.target.value
 
         if (data === "") {
-            setUsernameError("Username can not be empty!");
+            setUsernameError("Username can not be empty!")
         } else {
-            setUsernameError(null);
+            setUsernameError(null)
         }
     }
 
     const validatePassword = (e) => {
-        const data = e.target.value;
+        const data = e.target.value
 
         if (data === "") {
-            setPasswordError("Password can not be empty!");
+            setPasswordError("Password can not be empty!")
         } else {
-            setPasswordError(null);
+            setPasswordError(null)
         }
     }
 
     const submitForm = (e) => {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target).entries());
-        const formData = new FormData(e.target);
+        e.preventDefault()
+        const data = Object.fromEntries(new FormData(e.target).entries())
+        const formData = new FormData(e.target)
 
         if (data.username === "" && data.password === "") {
-            setUsernameError("Username can not be empty!");
-            setPasswordError("Password can not be empty!");
+            setUsernameError("Username can not be empty!")
+            setPasswordError("Password can not be empty!")
         } else if (data.username === "") {
-            setUsernameError("Username can not be empty!");
+            setUsernameError("Username can not be empty!")
         } else if (data.password === "") {
-            setPasswordError("Password can not be empty!");
+            setPasswordError("Password can not be empty!")
         } else {
-            setUsernameError(null);
-            setPasswordError(null);
-            setIsLoading(true);
+            setUsernameError(null)
+            setPasswordError(null)
+            setIsLoading(true)
 
             axios
                 .post("http://127.0.0.1:8000/api/login/", formData)
                 .then((response) => {
                     if (response.status === 200) {
-                        const token = response.data.token;
+                        const token = response.data.token
                         if (isChecked) {
-                            Cookies.set('token', token, {expires: 7, path: '/'});
+                            Cookies.set('token', token, {expires: 7, path: '/'})
                         } else {
-                            Cookies.set('token', token, {path: '/'});
+                            Cookies.set('token', token, {path: '/'})
                         }
-                        window.location.href = "/dashboard";
-                        setIsLoading(false);
+                        window.location.href = "/dashboard"
+                        setIsLoading(false)
                     }
                 })
                 .catch(() => {
                     toast.error('Username or Password is incorrect', {
                         ...ToastSettings
-                    });
-                    setIsLoading(false);
-                });
+                    })
+                    setIsLoading(false)
+                })
         }
     }
 
@@ -159,5 +159,5 @@ export default function Signin() {
                 <Footer></Footer>
             </section>
         </>
-    );
+    )
 }

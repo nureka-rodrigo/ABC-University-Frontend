@@ -1,6 +1,6 @@
-import ThemeToggler from "./Theme-Toggler";
-import {Link} from "react-router-dom";
-import Logo from "../logo.svg";
+import ThemeToggler from "./Theme-Toggler"
+import {Link} from "react-router-dom"
+import Logo from "../logo.svg"
 
 export default function Header() {
     return (

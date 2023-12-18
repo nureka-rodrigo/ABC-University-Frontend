@@ -1,15 +1,15 @@
-import SidebarStudent from "../components/Sidebar-Student";
-import {Select, Table} from "flowbite-react";
-import Footer from "../components/Footer";
-import axios from "axios";
-import {TokenHeader} from "../data/TokenHeader";
-import React, {useCallback, useEffect, useState} from "react";
-import LoadingSpinner from "../components/Loading-Spinner";
+import SidebarStudent from "../components/Sidebar-Student"
+import {Select, Table} from "flowbite-react"
+import Footer from "../components/Footer"
+import axios from "axios"
+import {TokenHeader} from "../data/TokenHeader"
+import React, {useCallback, useEffect, useState} from "react"
+import LoadingSpinner from "../components/Loading-Spinner"
 
 export default function Result() {
 
-    const [result, setResult] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [result, setResult] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     const getSelectedSemester = (e) => {
         const selectedSemester = e.target.value
@@ -83,7 +83,7 @@ export default function Result() {
                                             <Table.Cell>{data?.grade}</Table.Cell>
                                             <Table.Cell>{data?.course.type}</Table.Cell>
                                         </Table.Row>
-                                    );
+                                    )
                                 })
                             ) : (
                                 <Table.Row
@@ -98,5 +98,5 @@ export default function Result() {
                 <Footer/>
             </div>
         </>
-    );
+    )
 }

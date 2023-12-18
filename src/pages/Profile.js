@@ -1,123 +1,123 @@
-import SidebarStudent from "../components/Sidebar-Student";
-import Footer from "../components/Footer";
-import React, {useState} from "react";
-import {FileInput, Textarea, TextInput} from "flowbite-react";
-import axios from "axios";
-import {toast} from "react-toastify";
-import LoadingSpinner from "../components/Loading-Spinner";
-import {ToastSettings} from "../data/ToastSettings";
-import {TokenHeader} from "../data/TokenHeader";
-import {TokenHeaderMultipart} from "../data/TokenHeaderMultipart";
-import {useStudent} from "../hooks/StudentContext";
+import SidebarStudent from "../components/Sidebar-Student"
+import Footer from "../components/Footer"
+import React, {useState} from "react"
+import {FileInput, Textarea, TextInput} from "flowbite-react"
+import axios from "axios"
+import {toast} from "react-toastify"
+import LoadingSpinner from "../components/Loading-Spinner"
+import {ToastSettings} from "../data/ToastSettings"
+import {TokenHeader} from "../data/TokenHeader"
+import {TokenHeaderMultipart} from "../data/TokenHeaderMultipart"
+import {useStudent} from "../hooks/StudentContext"
 
 export default function Profile() {
-    const [currentPasswordError, setCurrentPasswordError] = useState(null);
-    const [newPasswordError, setNewPasswordError] = useState(null);
-    const [confirmPasswordError, setConfirmPasswordError] = useState(null);
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [fileError, setFileError] = useState(null);
-    const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false);
-    const [isPasswordDrawerOpen, setIsPasswordDrawerOpen] = useState(false);
+    const [currentPasswordError, setCurrentPasswordError] = useState(null)
+    const [newPasswordError, setNewPasswordError] = useState(null)
+    const [confirmPasswordError, setConfirmPasswordError] = useState(null)
+    const [selectedFile, setSelectedFile] = useState(null)
+    const [fileError, setFileError] = useState(null)
+    const [isProfileDrawerOpen, setIsProfileDrawerOpen] = useState(false)
+    const [isPasswordDrawerOpen, setIsPasswordDrawerOpen] = useState(false)
     const {student, setStudent, isLoading, setIsLoading, getStudentDetails} = useStudent()
 
     const openProfileDrawer = () => {
-        setIsProfileDrawerOpen(true);
-        closePasswordDrawer();
-    };
+        setIsProfileDrawerOpen(true)
+        closePasswordDrawer()
+    }
 
     const closeProfileDrawer = () => {
-        setIsProfileDrawerOpen(false);
-    };
+        setIsProfileDrawerOpen(false)
+    }
 
     const openPasswordDrawer = () => {
-        setIsPasswordDrawerOpen(true);
-        closeProfileDrawer();
-    };
+        setIsPasswordDrawerOpen(true)
+        closeProfileDrawer()
+    }
 
     const closePasswordDrawer = () => {
-        setIsPasswordDrawerOpen(false);
-    };
+        setIsPasswordDrawerOpen(false)
+    }
 
     const validateCurrentPassword = (e) => {
-        const data = e.target.value;
+        const data = e.target.value
 
         if (data === "") {
-            setCurrentPasswordError("This field must be filled out!");
+            setCurrentPasswordError("This field must be filled out!")
         } else {
-            setCurrentPasswordError(null);
+            setCurrentPasswordError(null)
         }
     }
 
     const validateNewPassword = (e) => {
-        const data = e.target.value;
+        const data = e.target.value
 
         if (data === "") {
-            setNewPasswordError("This field must be filled out!");
+            setNewPasswordError("This field must be filled out!")
         } else if (data.length < 8) {
-            setNewPasswordError("Password should contains 8 or more characters!");
+            setNewPasswordError("Password should contains 8 or more characters!")
         } else {
-            setNewPasswordError(null);
+            setNewPasswordError(null)
         }
     }
 
     const validateConfirmPassword = (e) => {
-        const data = e.target.value;
+        const data = e.target.value
 
         if (data === "") {
-            setConfirmPasswordError("This field must be filled out!");
+            setConfirmPasswordError("This field must be filled out!")
         } else {
-            setConfirmPasswordError(null);
+            setConfirmPasswordError(null)
         }
     }
 
     const validateFile = (e) => {
-        const file = e.target.files[0];
-        const fileExtensionArray = file.name.split(".");
-        const fileExtension = fileExtensionArray[fileExtensionArray.length - 1];
+        const file = e.target.files[0]
+        const fileExtensionArray = file.name.split(".")
+        const fileExtension = fileExtensionArray[fileExtensionArray.length - 1]
 
         if (file.size > 2048000) {
-            setFileError("MAX FILE size is 2MB!");
+            setFileError("MAX FILE size is 2MB!")
         } else if (
             fileExtension !== "png" &&
             fileExtension !== "jpg" &&
             fileExtension !== "svg"
         ) {
-            setFileError("Only SVG, JPG, JPEG and PNG are allowed!");
+            setFileError("Only SVG, JPG, JPEG and PNG are allowed!")
         } else {
-            setFileError(null);
-            setSelectedFile(file);
+            setFileError(null)
+            setSelectedFile(file)
         }
     }
 
     const submitFormChangePassword = (e) => {
-        const data = Object.fromEntries(new FormData(e.target).entries());
-        const formData = new FormData(e.target);
-        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries())
+        const formData = new FormData(e.target)
+        e.preventDefault()
 
         if (
             data.currentPassword === "" &&
             data.newPassword === "" &&
             data.confirmPassword === ""
         ) {
-            setCurrentPasswordError("This field must be filled out!");
-            setNewPasswordError("This field must be filled out!");
-            setConfirmPasswordError("This field must be filled out!");
+            setCurrentPasswordError("This field must be filled out!")
+            setNewPasswordError("This field must be filled out!")
+            setConfirmPasswordError("This field must be filled out!")
         } else if (data.currentPassword === "") {
-            setCurrentPasswordError("This field must be filled out!");
+            setCurrentPasswordError("This field must be filled out!")
         } else if (data.newPassword === "") {
-            setNewPasswordError("This field must be filled out!");
+            setNewPasswordError("This field must be filled out!")
         } else if (data.confirmPassword === "") {
-            setConfirmPasswordError("This field must be filled out!");
+            setConfirmPasswordError("This field must be filled out!")
         } else if (data.newPassword.length < 8) {
-            setNewPasswordError("Password should contains 8 or more characters!");
+            setNewPasswordError("Password should contains 8 or more characters!")
         } else if (data.newPassword !== data.confirmPassword) {
-            setNewPasswordError("Passwords does not match!");
-            setConfirmPasswordError("Passwords does not match!");
+            setNewPasswordError("Passwords does not match!")
+            setConfirmPasswordError("Passwords does not match!")
         } else {
-            setCurrentPasswordError(null);
-            setNewPasswordError(null);
-            setConfirmPasswordError(null);
-            setIsLoading(true);
+            setCurrentPasswordError(null)
+            setNewPasswordError(null)
+            setConfirmPasswordError(null)
+            setIsLoading(true)
 
             axios
                 .post(`http://127.0.0.1:8000/api/user/update_password/`, formData, {
@@ -127,45 +127,45 @@ export default function Profile() {
                     if (response.status === 200) {
                         toast.success('Password updated successfully', {
                             ...ToastSettings
-                        });
-                        setIsPasswordDrawerOpen(false);
-                        setIsLoading(false);
+                        })
+                        setIsPasswordDrawerOpen(false)
+                        setIsLoading(false)
                     }
                 })
                 .catch((error) => {
                     console.log(error)
-                    setIsLoading(false);
-                });
+                    setIsLoading(false)
+                })
         }
     }
 
     const submitFormProfile = (e) => {
-        const formData = new FormData(e.target);
-        e.preventDefault();
+        const formData = new FormData(e.target)
+        e.preventDefault()
 
         if (fileError === null) {
-            setIsLoading(true);
+            setIsLoading(true)
             axios
                 .put(`http://127.0.0.1:8000/api/user/update_profile/`, formData, {
                     ...TokenHeaderMultipart
                 })
                 .then((response) => {
                     if (response.status === 200) {
-                        setStudent(response.data);
+                        setStudent(response.data)
                         toast.success('Profile updated successfully', {
                             ...ToastSettings
-                        });
-                        setIsProfileDrawerOpen(false);
-                        setIsLoading(false);
+                        })
+                        setIsProfileDrawerOpen(false)
+                        setIsLoading(false)
                     }
-                    getStudentDetails();
+                    getStudentDetails()
                 })
                 .catch(() => {
                     toast.error('An error occurred!', {
                         ...ToastSettings
-                    });
-                    setIsLoading(false);
-                });
+                    })
+                    setIsLoading(false)
+                })
         }
     }
 

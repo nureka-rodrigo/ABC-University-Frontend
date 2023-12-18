@@ -1,9 +1,9 @@
-import SidebarStudent from "../components/Sidebar-Student";
-import Footer from "../components/Footer";
-import {Card} from "flowbite-react";
-import SemesterChart from "../components/Chart";
-import {useStudent} from "../hooks/StudentContext";
-import {useEffect} from "react";
+import SidebarStudent from "../components/Sidebar-Student"
+import Footer from "../components/Footer"
+import {Card} from "flowbite-react"
+import SemesterChart from "../components/Chart"
+import {useStudent} from "../hooks/StudentContext"
+import {useEffect} from "react"
 
 export default function Dashboard() {
 
@@ -35,5 +35,5 @@ export default function Dashboard() {
                 <Footer/>
             </div>
         </>
-    );
+    )
 }

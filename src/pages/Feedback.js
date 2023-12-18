@@ -1,25 +1,25 @@
-import SidebarStudent from "../components/Sidebar-Student";
-import Footer from "../components/Footer";
-import {Label, Table} from "flowbite-react";
-import {AiOutlineClose} from "react-icons/ai";
-import React, {useCallback, useEffect, useState} from "react";
-import axios from "axios";
-import LoadingSpinner from "../components/Loading-Spinner";
+import SidebarStudent from "../components/Sidebar-Student"
+import Footer from "../components/Footer"
+import {Label, Table} from "flowbite-react"
+import {AiOutlineClose} from "react-icons/ai"
+import React, {useCallback, useEffect, useState} from "react"
+import axios from "axios"
+import LoadingSpinner from "../components/Loading-Spinner"
 
 export default function Feedback() {
 
-    const [feedbackError, setFeedbackError] = useState(null);
-    const [course, setCourse] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [feedbackError, setFeedbackError] = useState(null)
+    const [course, setCourse] = useState([])
+    const [isModalOpen, setIsModalOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const openModal = () => {
-        setIsModalOpen(true);
-    };
+        setIsModalOpen(true)
+    }
 
     const closeModal = () => {
-        setIsModalOpen(false);
-    };
+        setIsModalOpen(false)
+    }
 
     const getCourses = useCallback(() => {
         setIsLoading(true)
@@ -58,7 +58,7 @@ export default function Feedback() {
         {
             question: "Overall Satisfaction",
         },
-    ];
+    ]
 
     const feedbackFormAnswers = [
         {
@@ -76,10 +76,10 @@ export default function Feedback() {
         {
             answer: "Excellent",
         },
-    ];
+    ]
 
     function submitFeedback(e) {
-        const data = Object.fromEntries(new FormData(e.target).entries());
+        const data = Object.fromEntries(new FormData(e.target).entries())
 
         if (
             data.feedback1 === undefined ||
@@ -88,8 +88,8 @@ export default function Feedback() {
             data.feedback4 === undefined ||
             data.feedback5 === undefined
         ) {
-            e.preventDefault();
-            setFeedbackError("Please answer all questions!");
+            e.preventDefault()
+            setFeedbackError("Please answer all questions!")
         }
     }
 
@@ -130,7 +130,7 @@ export default function Feedback() {
                                                 </button>
                                             </Table.Cell>
                                         </Table.Row>
-                                    );
+                                    )
                                 })
                             ) : (
                                 <Table.Row
@@ -193,10 +193,10 @@ export default function Feedback() {
                                                             value={answers?.answer}
                                                         />
                                                     </div>
-                                                );
+                                                )
                                             })}
                                         </div>
-                                    );
+                                    )
                                 })}
                                 <div className="text-center pb-3">
                                     <span className="text-red-500">{feedbackError}</span>
@@ -213,5 +213,5 @@ export default function Feedback() {
                 </div>
             </form>
         </>
-    );
+    )
 }

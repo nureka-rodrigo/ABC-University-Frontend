@@ -1,5 +1,5 @@
-import React from "react";
-import {Spinner} from "flowbite-react";
+import React from "react"
+import {Spinner} from "flowbite-react"
 
 export default function LoadingSpinner() {
     return (

@@ -1,14 +1,14 @@
-import SidebarStudent from "../components/Sidebar-Student";
-import Footer from "../components/Footer";
-import {Card, Checkbox, Table} from "flowbite-react";
-import React, {useCallback, useEffect, useState} from "react";
-import axios from "axios";
-import LoadingSpinner from "../components/Loading-Spinner";
+import SidebarStudent from "../components/Sidebar-Student"
+import Footer from "../components/Footer"
+import {Card, Checkbox, Table} from "flowbite-react"
+import React, {useCallback, useEffect, useState} from "react"
+import axios from "axios"
+import LoadingSpinner from "../components/Loading-Spinner"
 
 export default function Courses() {
 
-    const [course, setCourse] = useState([]);
-    const [isLoading, setIsLoading] = useState(false);
+    const [course, setCourse] = useState([])
+    const [isLoading, setIsLoading] = useState(false)
 
     const getCourses = useCallback(() => {
         setIsLoading(true)
@@ -32,8 +32,9 @@ export default function Courses() {
     }, [getCourses])
 
     function submitCourses(e) {
-        e.preventDefault();
-        const data = Object.fromEntries(new FormData(e.target).entries());
+        e.preventDefault()
+        const data = Object.fromEntries(new FormData(e.target).entries())
+        console.log(data)
     }
 
     return (
@@ -97,7 +98,7 @@ export default function Courses() {
                                                     )}
                                                 </Table.Cell>
                                             </Table.Row>
-                                        );
+                                        )
                                     })
                                 ) : (
                                     <Table.Row
@@ -132,5 +133,5 @@ export default function Courses() {
                 <Footer/>
             </div>
         </>
-    );
+    )
 }
