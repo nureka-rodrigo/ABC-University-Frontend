@@ -2,11 +2,16 @@ import SidebarStudent from "../components/Sidebar-Student";
 import Footer from "../components/Footer";
 import {Label, Table} from "flowbite-react";
 import {AiOutlineClose} from "react-icons/ai";
-import {useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
+import axios from "axios";
+import LoadingSpinner from "../components/Loading-Spinner";
 
 export default function Feedback() {
+
     const [feedbackError, setFeedbackError] = useState(null);
+    const [course, setCourse] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -15,62 +20,27 @@ export default function Feedback() {
     const closeModal = () => {
         setIsModalOpen(false);
     };
-    const feedbackTable = [
-        {
-            code: "CST 102-2",
-            title: "Introduction to Computer Science",
-            credits: "2",
-            lecturer: "Ms. T. Rajeetha",
-        },
-        {
-            code: "CST 101-2",
-            title: "Fundamentals of Electronics",
-            credits: "2",
-            lecturer: "Mr. M. A. R. L. Samaraweera",
-        },
-        {
-            code: "CST 121-3",
-            title: "Structured Programming",
-            credits: "3",
-            lecturer: "Mr. M. N. T. Nandasena",
-        },
-        {
-            code: "CST 111-2",
-            title: "Essential Mathematics",
-            credits: "2",
-            lecturer: "Ms. D. G. S. D. Dehigama",
-        },
-        {
-            code: "ESD 121-2",
-            title: "English Language Level-I",
-            credits: "2",
-            lecturer: "Ms. Yohani Alahakoon",
-        },
-        {
-            code: "CST 122-2",
-            title: "Web Programming",
-            credits: "2",
-            lecturer: "Dr. M. Ramashini",
-        },
-        {
-            code: "CST 131-2",
-            title: "Fundamentals of Computer Network",
-            credits: "2",
-            lecturer: "Mr. M. S. S. Razeeth",
-        },
-        {
-            code: "ESD 161-1",
-            title: "Tamil Language-I",
-            credits: "1",
-            lecturer: "Mr. Rubavathanan",
-        },
-        {
-            code: "BGE 121-2",
-            title: "Ethics and Law Basics",
-            credits: "1",
-            lecturer: "Dr. Nishadini Peiris",
-        },
-    ];
+
+    const getCourses = useCallback(() => {
+        setIsLoading(true)
+
+        axios
+            .get(`http://127.0.0.1:8000/api/get_courses_prev_sem/`)
+            .then((response) => {
+                if (response.status === 200) {
+                    setCourse(response.data)
+                    setIsLoading(false)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+                setIsLoading(false)
+            })
+    }, [setIsLoading])
+
+    useEffect(() => {
+        getCourses()
+    }, [getCourses])
 
     const feedbackForm = [
         {
@@ -121,12 +91,12 @@ export default function Feedback() {
             e.preventDefault();
             setFeedbackError("Please answer all questions!");
         }
-        console.log(data);
     }
 
     return (
         <>
             <SidebarStudent/>
+            {isLoading && <LoadingSpinner/>}
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <div className="overflow-x-auto p-5">
                     <Table hoverable>
@@ -140,7 +110,7 @@ export default function Feedback() {
                             </Table.HeadCell>
                         </Table.Head>
                         <Table.Body className="divide-y">
-                            {feedbackTable.map((value, i) => {
+                            {course.map((value, i) => {
                                 return (
                                     <Table.Row
                                         className="bg-white dark:border-gray-700 dark:bg-gray-800"
@@ -149,7 +119,7 @@ export default function Feedback() {
                                         <Table.Cell>{value?.code}</Table.Cell>
                                         <Table.Cell>{value?.title}</Table.Cell>
                                         <Table.Cell>{value?.credits}</Table.Cell>
-                                        <Table.Cell>{value?.lecturer}</Table.Cell>
+                                        <Table.Cell>{value?.lecturer.name}</Table.Cell>
                                         <Table.Cell>
                                             <button
                                                 className="font-medium text-primary-600 hover:underline dark:text-primary-500"

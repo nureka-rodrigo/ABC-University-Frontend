@@ -1,66 +1,35 @@
 import SidebarStudent from "../components/Sidebar-Student";
 import Footer from "../components/Footer";
 import {Card, Checkbox, Table} from "flowbite-react";
-import React from "react";
+import React, {useCallback, useEffect, useState} from "react";
+import axios from "axios";
+import LoadingSpinner from "../components/Loading-Spinner";
 
 export default function Courses() {
 
-    const courseTable = [
-        {
-            code: "CST 102-2",
-            title: "Introduction to Computer Science",
-            credits: "2",
-            type: "C",
-        },
-        {
-            code: "CST 101-2",
-            title: "Fundamentals of Electronics",
-            credits: "2",
-            type: "C",
-        },
-        {
-            code: "CST 121-3",
-            title: "Structured Programming",
-            credits: "3",
-            type: "C",
-        },
-        {
-            code: "CST 111-2",
-            title: "Essential Mathematics",
-            credits: "2",
-            type: "C",
-        },
-        {
-            code: "ESD 121-2",
-            title: "English Language Level-I",
-            credits: "2",
-            type: "C",
-        },
-        {
-            code: "CST 122-2",
-            title: "Web Programming",
-            credits: "2",
-            type: "C",
-        },
-        {
-            code: "CST 131-2",
-            title: "Fundamentals of Computer Network",
-            credits: "2",
-            type: "C",
-        },
-        {
-            code: "ESD 161-1",
-            title: "Tamil Language-I",
-            credits: "1",
-            type: "C",
-        },
-        {
-            code: "BGE 121-2",
-            title: "Ethics and Law Basics",
-            credits: "1",
-            type: "C",
-        },
-    ];
+    const [course, setCourse] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    const getCourses = useCallback(() => {
+        setIsLoading(true)
+
+        axios
+            .get(`http://127.0.0.1:8000/api/get_courses_next_sem/`)
+            .then((response) => {
+                if (response.status === 200) {
+                    setCourse(response.data)
+                    setIsLoading(false)
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+                setIsLoading(false)
+            })
+    }, [setIsLoading])
+
+    useEffect(() => {
+        getCourses()
+    }, [getCourses])
 
     function submitCourses(e) {
         e.preventDefault();
@@ -71,6 +40,7 @@ export default function Courses() {
     return (
         <>
             <SidebarStudent/>
+            {isLoading && <LoadingSpinner/>}
             <div className="flex flex-col min-h-screen sm:ml-64 mt-14 bg-gray-100 dark:bg-gray-900">
                 <div className="p-5">
                     <Card className="w-full">
@@ -99,7 +69,7 @@ export default function Courses() {
                                 </Table.HeadCell>
                             </Table.Head>
                             <Table.Body className="divide-y">
-                                {courseTable.map((value, i) => {
+                                {course.map((value, i) => {
                                     return (
                                         <Table.Row
                                             className="bg-white dark:border-gray-700 dark:bg-gray-800"
