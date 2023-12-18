@@ -110,27 +110,35 @@ export default function Feedback() {
                             </Table.HeadCell>
                         </Table.Head>
                         <Table.Body className="divide-y">
-                            {course.map((value, i) => {
-                                return (
-                                    <Table.Row
-                                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                                        key={i}
-                                    >
-                                        <Table.Cell>{value?.code}</Table.Cell>
-                                        <Table.Cell>{value?.title}</Table.Cell>
-                                        <Table.Cell>{value?.credits}</Table.Cell>
-                                        <Table.Cell>{value?.lecturer.name}</Table.Cell>
-                                        <Table.Cell>
-                                            <button
-                                                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                                onClick={openModal}
-                                            >
-                                                Feedback
-                                            </button>
-                                        </Table.Cell>
-                                    </Table.Row>
-                                );
-                            })}
+                            {course.length > 0 ? (
+                                course.map((value, i) => {
+                                    return (
+                                        <Table.Row
+                                            className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                            key={i}
+                                        >
+                                            <Table.Cell>{value?.code}</Table.Cell>
+                                            <Table.Cell>{value?.title}</Table.Cell>
+                                            <Table.Cell>{value?.credits}</Table.Cell>
+                                            <Table.Cell>{value?.lecturer.name}</Table.Cell>
+                                            <Table.Cell>
+                                                <button
+                                                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                                                    onClick={openModal}
+                                                >
+                                                    Feedback
+                                                </button>
+                                            </Table.Cell>
+                                        </Table.Row>
+                                    );
+                                })
+                            ) : (
+                                <Table.Row
+                                    className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                >
+                                    <Table.Cell colSpan="5">No data found</Table.Cell>
+                                </Table.Row>
+                            )}
                         </Table.Body>
                     </Table>
                 </div>

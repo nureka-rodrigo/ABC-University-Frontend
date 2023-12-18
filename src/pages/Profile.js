@@ -20,7 +20,6 @@ export default function Profile() {
     const [isPasswordDrawerOpen, setIsPasswordDrawerOpen] = useState(false);
     const {student, setStudent, isLoading, setIsLoading, getStudentDetails} = useStudent()
 
-
     const openProfileDrawer = () => {
         setIsProfileDrawerOpen(true);
         closePasswordDrawer();
@@ -135,9 +134,6 @@ export default function Profile() {
                 })
                 .catch((error) => {
                     console.log(error)
-                    // toast.error('Current password is incorrect!', {
-                    //     ...ToastSettings
-                    // });
                     setIsLoading(false);
                 });
         }

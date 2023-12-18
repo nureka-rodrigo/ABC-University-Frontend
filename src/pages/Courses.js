@@ -69,33 +69,51 @@ export default function Courses() {
                                 </Table.HeadCell>
                             </Table.Head>
                             <Table.Body className="divide-y">
-                                {course.map((value, i) => {
-                                    return (
-                                        <Table.Row
-                                            className="bg-white dark:border-gray-700 dark:bg-gray-800"
-                                            key={i}
-                                        >
-                                            <Table.Cell>{value?.code}</Table.Cell>
-                                            <Table.Cell>{value?.title}</Table.Cell>
-                                            <Table.Cell>{value?.credits}</Table.Cell>
-                                            <Table.Cell>{value?.type}</Table.Cell>
-                                            <Table.Cell className="p-4">
-                                                <Checkbox className="checked:!bg-primary-600" id={value?.code}
-                                                          name={value?.code}/>
-                                            </Table.Cell>
-                                        </Table.Row>
-                                    );
-                                })}
+                                {course.length > 0 ? (
+                                    course.map((value, i) => {
+                                        return (
+                                            <Table.Row
+                                                className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                                key={i}
+                                            >
+                                                <Table.Cell>{value?.code}</Table.Cell>
+                                                <Table.Cell>{value?.title}</Table.Cell>
+                                                <Table.Cell>{value?.credits}</Table.Cell>
+                                                <Table.Cell>{value?.type}</Table.Cell>
+                                                <Table.Cell className="p-4">
+                                                    <Checkbox className="checked:!bg-primary-600" id={value?.code}
+                                                              name={value?.code}/>
+                                                </Table.Cell>
+                                            </Table.Row>
+                                        );
+                                    })
+                                ) : (
+                                    <Table.Row
+                                        className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                                    >
+                                        <Table.Cell colSpan="5">No data found</Table.Cell>
+                                    </Table.Row>
+                                )}
                             </Table.Body>
                         </Table>
                         <div className="pt-5
                         flex justify-center items-center">
-                            <button
-                                type="submit"
-                                className="sm:max-w-sm w-screen text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-                            >
-                                Register
-                            </button>
+                            {course.length > 0 ? (
+                                <button
+                                    type="submit"
+                                    className="sm:max-w-sm w-screen text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                >
+                                    Register
+                                </button>
+                            ) : (
+                                <button
+                                    type="submit"
+                                    className="sm:max-w-sm w-screen text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                                    disabled
+                                >
+                                    Register
+                                </button>
+                            )}
                         </div>
                     </form>
                 </div>

@@ -6,7 +6,7 @@ import {Link, useLocation} from "react-router-dom";
 import ThemeToggler from "./Theme-Toggler";
 import Logo from "../logo.svg";
 import LoadingSpinner from "./Loading-Spinner";
-import React, {useCallback} from "react";
+import React, {useCallback, useEffect} from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import {toast} from "react-toastify";
@@ -19,7 +19,11 @@ export default function SidebarStudent() {
     let pathArray = useLocation().pathname.split("/");
     let lastPart = pathArray[pathArray.length - 1];
     const token = Cookies.get('token', {path: '/'});
-    const {student, isLoading, setIsLoading} = useStudent()
+    const {student, isLoading, setIsLoading, getStudentDetails} = useStudent()
+
+    useEffect(() => {
+        getStudentDetails()
+    }, [getStudentDetails])
 
     if (!token) {
         window.location.href = "/";
