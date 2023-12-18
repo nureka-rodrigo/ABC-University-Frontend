@@ -56,7 +56,6 @@ export default function SidebarStudent() {
     }
 
     const getImageSrc = useCallback(() => {
-        console.log(student)
         if (student && student.image) {
             const imageFormat = student.image.split(';')[0].split('/')[1];
             return `data:image/${imageFormat};base64,${student.image}`;

@@ -34,7 +34,6 @@ export default function Courses() {
     function submitCourses(e) {
         e.preventDefault();
         const data = Object.fromEntries(new FormData(e.target).entries());
-        console.log(data);
     }
 
     return (
@@ -81,8 +80,21 @@ export default function Courses() {
                                                 <Table.Cell>{value?.credits}</Table.Cell>
                                                 <Table.Cell>{value?.type}</Table.Cell>
                                                 <Table.Cell className="p-4">
-                                                    <Checkbox className="checked:!bg-primary-600" id={value?.code}
-                                                              name={value?.code}/>
+                                                    {value?.type === "C" ? (
+                                                        <Checkbox
+                                                            className="checked:!bg-primary-600"
+                                                            id={value?.code}
+                                                            name={value?.code}
+                                                            defaultChecked
+                                                            disabled
+                                                        />
+                                                    ) : (
+                                                        <Checkbox
+                                                            className="checked:!bg-primary-600"
+                                                            id={value?.code}
+                                                            name={value?.code}
+                                                        />
+                                                    )}
                                                 </Table.Cell>
                                             </Table.Row>
                                         );
