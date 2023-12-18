@@ -15,11 +15,12 @@ export default function Result() {
         const selectedSemester = e.target.value
         submitSemester(selectedSemester)
     }
+
     const submitSemester = useCallback((selectedSemester) => {
         setIsLoading(true)
 
         axios
-            .post(`http://127.0.0.1:8000/api/get_result/`, {"semester": selectedSemester}, {
+            .post(`http://127.0.0.1:8000/api/get_results/`, {"semester": selectedSemester}, {
                 ...TokenHeader
             })
             .then((response) => {
@@ -30,9 +31,6 @@ export default function Result() {
             })
             .catch((error) => {
                 console.log(error)
-                // toast.error('Error loading data!', {
-                //     ...ToastSettings
-                // });
                 setIsLoading(false)
             })
     }, [setIsLoading])

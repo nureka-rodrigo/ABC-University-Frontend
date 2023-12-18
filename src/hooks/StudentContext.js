@@ -22,9 +22,6 @@ const StudentProvider = ({ children }) => {
             })
             .catch((error) => {
                 console.log(error)
-                // toast.error('Error loading data!', {
-                //     ...ToastSettings
-                // });
                 setIsLoading(false);
             });
     }, [setIsLoading])
