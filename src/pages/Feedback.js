@@ -36,7 +36,6 @@ export default function Feedback() {
             .get(`http://127.0.0.1:8000/api/get_courses_prev_sem/`)
             .then((response) => {
                 if (response.status === 200) {
-                    console.log(response.data)
                     setCourse(response.data)
                     setIsLoading(false)
                 }
@@ -120,7 +119,7 @@ export default function Feedback() {
                                             <Table.Cell>
                                                 <button
                                                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                                    onClick={()=>openModal(value?.course.code)}
+                                                    onClick={() => openModal(value?.course.code)}
                                                 >
                                                     Feedback
                                                 </button>
