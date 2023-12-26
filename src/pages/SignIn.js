@@ -9,7 +9,7 @@ import axios from "axios"
 import Cookies from 'js-cookie'
 import {ToastSettings} from "../data/ToastSettings"
 
-export default function Signin() {
+export default function SignIn() {
     const [usernameError, setUsernameError] = useState(null)
     const [passwordError, setPasswordError] = useState(null)
     const [isChecked, setIsChecked] = useState(false)

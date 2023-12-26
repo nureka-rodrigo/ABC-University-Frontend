@@ -6,7 +6,7 @@ import Courses from "./pages/Courses"
 import Result from "./pages/Result"
 import Feedback from "./pages/Feedback"
 import ErrorPage from "./pages/404"
-import Signin from "./pages/Signin"
+import SignIn from "./pages/SignIn"
 import LoadingSpinner from "./components/Loading-Spinner"
 import {ToastContainer} from "react-toastify"
 import PrivateRoute from "./components/Private-Route"
@@ -43,7 +43,7 @@ export default function App() {
                             <Route path={"*"} element={<ErrorPage/>}/>
                         </Route>
                         <Route element={<AnonymousRoute/>}>
-                            <Route path={"/"} element={<Signin/>}/>
+                            <Route path={"/"} element={<SignIn/>}/>
                             <Route path={"*"} element={<ErrorPage/>}/>
                         </Route>
                     </Routes>
