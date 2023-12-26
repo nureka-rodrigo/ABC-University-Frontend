@@ -2,19 +2,27 @@ import SidebarStudent from "../components/Sidebar-Student"
 import Footer from "../components/Footer"
 import {Label, Table} from "flowbite-react"
 import {AiOutlineClose} from "react-icons/ai"
-import React, {useCallback, useEffect, useState} from "react"
+import React, {useCallback, useEffect, useRef, useState} from "react"
 import axios from "axios"
 import LoadingSpinner from "../components/Loading-Spinner"
+import {TokenHeader} from "../data/TokenHeader";
+import {toast} from "react-toastify";
+import {ToastSettings} from "../data/ToastSettings";
+import {FeedbackQuestions} from "../data/FeedbackQuestions";
+import {FeedbackAnswers} from "../data/FeedbackAnswers";
 
 export default function Feedback() {
 
     const [feedbackError, setFeedbackError] = useState(null)
     const [course, setCourse] = useState([])
+    const [selectedCourse, setSelectedCourse] = useState(null)
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const radioRef = useRef(null);
 
-    const openModal = () => {
+    const openModal = (selectedCourse) => {
         setIsModalOpen(true)
+        setSelectedCourse(selectedCourse)
     }
 
     const closeModal = () => {
@@ -28,6 +36,7 @@ export default function Feedback() {
             .get(`http://127.0.0.1:8000/api/get_courses_prev_sem/`)
             .then((response) => {
                 if (response.status === 200) {
+                    console.log(response.data)
                     setCourse(response.data)
                     setIsLoading(false)
                 }
@@ -42,44 +51,12 @@ export default function Feedback() {
         getCourses()
     }, [getCourses])
 
-    const feedbackForm = [
-        {
-            question: "Course Content",
-        },
-        {
-            question: "Instructor Effectiveness",
-        },
-        {
-            question: "Clarity of Explanations",
-        },
-        {
-            question: "Usefulness of Assignments/Assessments",
-        },
-        {
-            question: "Overall Satisfaction",
-        },
-    ]
-
-    const feedbackFormAnswers = [
-        {
-            answer: "Poor",
-        },
-        {
-            answer: "Below Average",
-        },
-        {
-            answer: "Average",
-        },
-        {
-            answer: "Above Average",
-        },
-        {
-            answer: "Excellent",
-        },
-    ]
-
-    function submitFeedback(e) {
+    const submitFeedback = (e) => {
         const data = Object.fromEntries(new FormData(e.target).entries())
+        const formData = new FormData(e.target)
+
+        formData.append('course', selectedCourse);
+        e.preventDefault()
 
         if (
             data.feedback1 === undefined ||
@@ -88,8 +65,27 @@ export default function Feedback() {
             data.feedback4 === undefined ||
             data.feedback5 === undefined
         ) {
-            e.preventDefault()
             setFeedbackError("Please answer all questions!")
+        } else {
+            setIsLoading(true)
+            axios
+                .post(`http://127.0.0.1:8000/api/submit_feedback/`, formData, {
+                    ...TokenHeader
+                })
+                .then((response) => {
+                    if (response.status === 200) {
+                        toast.success('Password updated successfully', {
+                            ...ToastSettings
+                        })
+                        setIsLoading(false)
+                        setIsModalOpen(false)
+                        e.target.reset();
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                    setIsLoading(false)
+                })
         }
     }
 
@@ -117,14 +113,14 @@ export default function Feedback() {
                                             className="bg-white dark:border-gray-700 dark:bg-gray-800"
                                             key={i}
                                         >
-                                            <Table.Cell>{value?.code}</Table.Cell>
-                                            <Table.Cell>{value?.title}</Table.Cell>
-                                            <Table.Cell>{value?.credits}</Table.Cell>
-                                            <Table.Cell>{value?.lecturer.name}</Table.Cell>
+                                            <Table.Cell>{value?.course.code}</Table.Cell>
+                                            <Table.Cell>{value?.course.title}</Table.Cell>
+                                            <Table.Cell>{value?.course.credits}</Table.Cell>
+                                            <Table.Cell>{value?.course.lecturer.name}</Table.Cell>
                                             <Table.Cell>
                                                 <button
                                                     className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                                                    onClick={openModal}
+                                                    onClick={()=>openModal(value?.course.code)}
                                                 >
                                                     Feedback
                                                 </button>
@@ -169,7 +165,7 @@ export default function Feedback() {
                                 </button>
                             </div>
                             <div className="p-4 md:p-5">
-                                {feedbackForm.map((value, i) => {
+                                {FeedbackQuestions.map((value, i) => {
                                     return (
                                         <div key={i}>
                       <span className="block ms-2 text-md font-medium text-gray-900 dark:text-gray-300">
@@ -177,14 +173,15 @@ export default function Feedback() {
                       </span>
                                             <br/>
 
-                                            {feedbackFormAnswers.map((answers, j) => {
+                                            {FeedbackAnswers.map((answers, j) => {
                                                 return (
                                                     <div className="flex items-center mb-4" key={j}>
                                                         <input
+                                                            ref={radioRef}
                                                             id={`feedback${i + 1}-option-${j + 1}`}
                                                             type="radio"
                                                             name={`feedback${i + 1}`}
-                                                            value={i + 1}
+                                                            value={answers?.answer}
                                                             className="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:focus:bg-blue-600 dark:bg-gray-700 dark:border-gray-600"
                                                         />
                                                         <Label
