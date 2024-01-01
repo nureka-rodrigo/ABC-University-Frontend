@@ -58,11 +58,11 @@ export default function Dashboard() {
                 await fetchResultsForSemester(i)
             }
             setData(calculateGPAs(resultsArray))
-            setIsLoading(false);
+            setIsLoading(false)
         }
 
         fetchAllResults().then(() => {
-            calculateCumulativeGPA();
+            calculateCumulativeGPA()
         })
 
         // console.log(data)
@@ -78,9 +78,9 @@ export default function Dashboard() {
         const totalGradePoints = semesterResults.reduce((total, result) => {
             const gradePoint = gpaScale[result.grade] || null
             return total + (gradePoint !== null ? gradePoint * parseFloat(result.credits) : 0)
-        }, 0);
+        }, 0)
 
-        return (totalGradePoints / totalCredits) || null;
+        return (totalGradePoints / totalCredits) || null
     }
 
     const calculateGPAs = (resultsArray) => {
@@ -100,7 +100,7 @@ export default function Dashboard() {
 
         resultsArray.forEach((result) => {
             if (result.grade !== null && result.grade !== "-") {
-                const gradePoints = gpaScale[result.grade] || 0.0;
+                const gradePoints = gpaScale[result.grade] || 0.0
 
                 totalPoints += gradePoints * result.credits
                 totalCredits += parseFloat(result.credits)
