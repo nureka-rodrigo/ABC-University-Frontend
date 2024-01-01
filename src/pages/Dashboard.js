@@ -11,7 +11,9 @@ export default function Dashboard() {
 
     const [isLoading, setIsLoading] = useState(false)
     const [data, setData] = useState([])
-    const resultsArray = [];
+    const [cumulativeGPA, setCumulativeGPA] = useState(0)
+
+    const resultsArray = []
 
     const gpaScale = {
         'A+': 4.00,
@@ -29,7 +31,7 @@ export default function Dashboard() {
     }
 
     const fetchResult = useCallback(() => {
-        setIsLoading(true);
+        setIsLoading(true)
 
         const fetchResultsForSemester = async (semester) => {
             try {
@@ -37,56 +39,76 @@ export default function Dashboard() {
                     `http://127.0.0.1:8000/api/get_results/`,
                     { semester },
                     TokenHeader
-                );
+                )
 
                 if (response.data.length > 0) {
                     response.data.forEach((data, i) => {
-                        resultsArray.push({ semester, grade: data?.grade, credits: data?.course.credits });
-                    });
+                        resultsArray.push({ semester, grade: data?.grade, credits: data?.course.credits })
+                    })
                 } else {
-                    resultsArray.push({ semester, grade: null, credits: null });
+                    resultsArray.push({ semester, grade: null, credits: null })
                 }
             } catch (error) {
-                console.error(error);
+                console.error(error)
             }
-        };
+        }
 
         const fetchAllResults = async () => {
             for (let i = 1; i <= 8; i++) {
-                await fetchResultsForSemester(i);
+                await fetchResultsForSemester(i)
             }
             setData(calculateGPAs(resultsArray))
             setIsLoading(false);
-        };
+        }
 
-        fetchAllResults();
-    }, []);
+        fetchAllResults().then(() => {
+            calculateCumulativeGPA();
+        })
+
+        // console.log(data)
+    }, [])
 
     useEffect(() => {
-        fetchResult()
+        fetchResult();
     }, [fetchResult])
 
     const calculateGPAForSemester = (semesterResults) => {
-        const totalCredits = semesterResults.reduce((total, result) => total + parseFloat(result.credits), 0);
+        const totalCredits = semesterResults.reduce((total, result) => total + parseFloat(result.credits), 0)
 
         const totalGradePoints = semesterResults.reduce((total, result) => {
-            const gradePoint = gpaScale[result.grade] || null;
-            return total + (gradePoint !== null ? gradePoint * parseFloat(result.credits) : 0);
+            const gradePoint = gpaScale[result.grade] || null
+            return total + (gradePoint !== null ? gradePoint * parseFloat(result.credits) : 0)
         }, 0);
 
-        return totalGradePoints / totalCredits || null;
-    };
+        return (totalGradePoints / totalCredits) || null;
+    }
 
     const calculateGPAs = (resultsArray) => {
-        const semesters = Array.from({ length: 8 }, (_, i) => i + 1);
+        const semesters = Array.from({ length: 8 }, (_, i) => i + 1)
 
         return semesters.map((semester) => {
-            const semesterResults = resultsArray.filter((result) => result.semester === semester);
-            const gpa = semesterResults.length > 0 ? calculateGPAForSemester(semesterResults) : null;
+            const semesterResults = resultsArray.filter((result) => result.semester === semester)
+            const gpa = semesterResults.length > 0 ? calculateGPAForSemester(semesterResults) : null
 
-            return {semester, gpa};
-        });
-    };
+            return { semester, gpa }
+        })
+    }
+
+    function calculateCumulativeGPA() {
+        let totalPoints = 0
+        let totalCredits = 0
+
+        resultsArray.forEach((result) => {
+            if (result.grade !== null && result.grade !== "-") {
+                const gradePoints = gpaScale[result.grade] || 0.0;
+
+                totalPoints += gradePoints * result.credits
+                totalCredits += parseFloat(result.credits)
+            }
+        })
+
+        setCumulativeGPA((totalPoints / totalCredits).toFixed(2))
+    }
 
     return (
         <>
@@ -104,7 +126,7 @@ export default function Dashboard() {
                             Overall GPA
                         </h5>
                         <p className="font-normal text-gray-700 dark:text-gray-400 text-center">
-                            3.85
+                            {cumulativeGPA}
                         </p>
                     </Card>
                 </div>
