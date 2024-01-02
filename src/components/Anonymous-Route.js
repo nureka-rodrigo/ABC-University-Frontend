@@ -6,7 +6,7 @@ import {TokenHeader} from "../data/TokenHeader"
 export default function AnonymousRoute() {
     const token = Cookies.get('token', {path: '/'})
 
-    axios.post("http://127.0.0.1:8000/api/user/check/", "", {
+    axios.post("api/user/check/", "", {
         ...TokenHeader
     })
         .then(response => {

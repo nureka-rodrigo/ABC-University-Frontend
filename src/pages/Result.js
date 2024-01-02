@@ -20,7 +20,7 @@ export default function Result() {
         setIsLoading(true)
 
         axios
-            .post(`http://127.0.0.1:8000/api/get_results/`, {"semester": selectedSemester}, {
+            .post(`api/get_results/`, {"semester": selectedSemester}, {
                 ...TokenHeader
             })
             .then((response) => {

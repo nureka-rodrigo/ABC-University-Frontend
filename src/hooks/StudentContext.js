@@ -11,7 +11,7 @@ const StudentProvider = ({ children }) => {
     const getStudentDetails = useCallback(() => {
         setIsLoading(true)
         axios
-            .post(`http://127.0.0.1:8000/api/user/student/`, "", {
+            .post(`api/user/student/`, "", {
                 ...TokenHeader
             })
             .then((response) => {

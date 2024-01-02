@@ -120,7 +120,7 @@ export default function Profile() {
             setIsLoading(true)
 
             axios
-                .post(`http://127.0.0.1:8000/api/user/update_password/`, formData, {
+                .post(`api/user/update_password/`, formData, {
                     ...TokenHeader
                 })
                 .then((response) => {
@@ -146,7 +146,7 @@ export default function Profile() {
         if (fileError === null) {
             setIsLoading(true)
             axios
-                .put(`http://127.0.0.1:8000/api/user/update_profile/`, formData, {
+                .put(`api/user/update_profile/`, formData, {
                     ...TokenHeaderMultipart
                 })
                 .then((response) => {

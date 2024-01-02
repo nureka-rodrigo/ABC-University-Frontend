@@ -16,7 +16,8 @@ import StudentProvider from "./hooks/StudentContext"
 
 export default function App() {
 
-    axios.defaults.withCredentials = true
+    axios.defaults.withCredentials = true;
+    axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
     if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
         document.documentElement.classList.add('dark')

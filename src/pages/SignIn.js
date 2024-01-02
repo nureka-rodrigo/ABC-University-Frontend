@@ -53,7 +53,7 @@ export default function SignIn() {
             setIsLoading(true)
 
             axios
-                .post("http://127.0.0.1:8000/api/login/", formData)
+                .post("api/login/", formData)
                 .then((response) => {
                     if (response.status === 200) {
                         const token = response.data.token

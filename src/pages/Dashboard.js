@@ -36,7 +36,7 @@ export default function Dashboard() {
         const fetchResultsForSemester = async (semester) => {
             try {
                 const response = await axios.post(
-                    `http://127.0.0.1:8000/api/get_results/`,
+                    `api/get_results/`,
                     { semester },
                     TokenHeader
                 )

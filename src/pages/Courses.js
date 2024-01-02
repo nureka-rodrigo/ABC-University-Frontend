@@ -18,7 +18,7 @@ export default function Courses() {
         setIsLoading(true)
 
         axios
-            .get(`http://127.0.0.1:8000/api/get_courses_next_sem/`)
+            .get(`api/get_courses_next_sem/`)
             .then((response) => {
                 if (response.status === 200) {
                     setCourse(response.data)

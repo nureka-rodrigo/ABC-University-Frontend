@@ -33,7 +33,7 @@ export default function Feedback() {
         setIsLoading(true)
 
         axios
-            .get(`http://127.0.0.1:8000/api/get_courses_prev_sem/`)
+            .get(`api/get_courses_prev_sem/`)
             .then((response) => {
                 if (response.status === 200) {
                     setCourse(response.data)
@@ -68,7 +68,7 @@ export default function Feedback() {
         } else {
             setIsLoading(true)
             axios
-                .post(`http://127.0.0.1:8000/api/submit_feedback/`, formData, {
+                .post(`api/submit_feedback/`, formData, {
                     ...TokenHeader
                 })
                 .then((response) => {
