@@ -4,11 +4,15 @@ import {Card, Checkbox, Table} from "flowbite-react"
 import React, {useCallback, useEffect, useState} from "react"
 import axios from "axios"
 import LoadingSpinner from "../components/Loading-Spinner"
+import {TokenHeader} from "../data/TokenHeader";
+import {toast} from "react-toastify";
+import {ToastSettings} from "../data/ToastSettings";
 
 export default function Courses() {
 
     const [course, setCourse] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [checkedCheckboxes, setCheckedCheckboxes] = useState([])
 
     const getCourses = useCallback(() => {
         setIsLoading(true)
@@ -31,10 +35,62 @@ export default function Courses() {
         getCourses()
     }, [getCourses])
 
+    const handleCheckboxChange = (value) => {
+        const newCheckedCheckboxes = [...checkedCheckboxes]
+
+        if (value.type === 'C') {
+            return
+        }
+
+        if (value.type === 'O') {
+            const isChecked = newCheckedCheckboxes.includes(value.code)
+
+            if (!isChecked) {
+                newCheckedCheckboxes.length = 0
+                newCheckedCheckboxes.push(value.code)
+            } else {
+                newCheckedCheckboxes.splice(newCheckedCheckboxes.indexOf(value.code), 1)
+            }
+        }
+
+        setCheckedCheckboxes(newCheckedCheckboxes)
+    }
+
+    const updateCheckedCheckboxesForTypeC = () => {
+        course.forEach((value) => {
+            if (value.type === 'C') {
+                checkedCheckboxes.push(value.code)
+            }
+        })
+    }
+
     function submitCourses(e) {
         e.preventDefault()
-        const data = Object.fromEntries(new FormData(e.target).entries())
-        console.log(data)
+        updateCheckedCheckboxesForTypeC()
+
+        const requestBody = {
+            checkedCourses: checkedCheckboxes,
+        };
+
+        setIsLoading(true)
+        axios
+            .post(`http://127.0.0.1:8000/api/register_sem/`, requestBody, {
+                ...TokenHeader
+            })
+            .then((response) => {
+                if (response.status === 200) {
+                    toast.success('Password updated successfully', {
+                        ...ToastSettings
+                    })
+                    console.log(response.data)
+                    setIsLoading(false)
+                    e.target.reset();
+                }
+            })
+            .catch((error) => {
+                console.log(error)
+                setIsLoading(false)
+            })
     }
 
     return (
@@ -81,21 +137,13 @@ export default function Courses() {
                                                 <Table.Cell>{value?.credits}</Table.Cell>
                                                 <Table.Cell>{value?.type}</Table.Cell>
                                                 <Table.Cell className="p-4">
-                                                    {value?.type === "C" ? (
-                                                        <Checkbox
-                                                            className="checked:!bg-primary-600"
-                                                            id={value?.code}
-                                                            name={value?.code}
-                                                            defaultChecked
-                                                            disabled
-                                                        />
-                                                    ) : (
-                                                        <Checkbox
-                                                            className="checked:!bg-primary-600"
-                                                            id={value?.code}
-                                                            name={value?.code}
-                                                        />
-                                                    )}
+                                                    <Checkbox
+                                                        className="checked:!bg-primary-600"
+                                                        id={value?.code}
+                                                        checked={value.type === 'C' || checkedCheckboxes.includes(value.code)}
+                                                        onChange={() => handleCheckboxChange(value)}
+                                                        disabled={value.type === 'C'}
+                                                    />
                                                 </Table.Cell>
                                             </Table.Row>
                                         )
