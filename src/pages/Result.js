@@ -30,7 +30,7 @@ export default function Result() {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                console.error(error)
                 setIsLoading(false)
             })
     }, [setIsLoading])

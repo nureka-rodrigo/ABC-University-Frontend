@@ -26,7 +26,7 @@ export default function Courses() {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                console.error(error)
                 setIsLoading(false)
             })
     }, [setIsLoading])
@@ -79,7 +79,7 @@ export default function Courses() {
             })
             .then((response) => {
                 if (response.status === 200) {
-                    toast.success('Password updated successfully', {
+                    toast.success('Registered for semester successfully', {
                         ...ToastSettings
                     })
                     console.log(response.data)
@@ -88,7 +88,10 @@ export default function Courses() {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                toast.error('An error occurred!', {
+                    ...ToastSettings
+                })
+                console.error(error)
                 setIsLoading(false)
             })
     }

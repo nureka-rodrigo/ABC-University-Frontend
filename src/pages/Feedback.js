@@ -41,7 +41,7 @@ export default function Feedback() {
                 }
             })
             .catch((error) => {
-                console.log(error)
+                console.error(error)
                 setIsLoading(false)
             })
     }, [setIsLoading])
@@ -82,7 +82,10 @@ export default function Feedback() {
                     }
                 })
                 .catch((error) => {
-                    console.log(error)
+                    toast.error('An error occurred!', {
+                        ...ToastSettings
+                    })
+                    console.error(error)
                     setIsLoading(false)
                 })
         }

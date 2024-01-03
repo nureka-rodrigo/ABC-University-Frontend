@@ -66,10 +66,11 @@ export default function SignIn() {
                         setIsLoading(false)
                     }
                 })
-                .catch(() => {
+                .catch((error) => {
                     toast.error('Username or Password is incorrect', {
                         ...ToastSettings
                     })
+                    console.error(error)
                     setIsLoading(false)
                 })
         }

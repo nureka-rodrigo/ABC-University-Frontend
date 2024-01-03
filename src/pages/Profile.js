@@ -133,7 +133,7 @@ export default function Profile() {
                     }
                 })
                 .catch((error) => {
-                    console.log(error)
+                    console.error(error)
                     setIsLoading(false)
                 })
         }
