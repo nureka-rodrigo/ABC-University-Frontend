@@ -78,11 +78,11 @@ export default function Profile() {
         if (file.size > 2048000) {
             setFileError("MAX FILE size is 2MB!")
         } else if (
-            fileExtension !== "png" &&
             fileExtension !== "jpg" &&
-            fileExtension !== "svg"
+            fileExtension !== "jpeg" &&
+            fileExtension !== "png"
         ) {
-            setFileError("Only SVG, JPG, JPEG and PNG are allowed!")
+            setFileError("Only JPG, JPEG and PNG are allowed!")
         } else {
             setFileError(null)
             setSelectedFile(file)
@@ -384,7 +384,7 @@ export default function Profile() {
                                         fileError ? (
                                             <span className="text-red-500">{fileError}</span>
                                         ) : (
-                                            <span>{"SVG, PNG or JPG. (MAX SIZE: 2MB)."}</span>
+                                            <span>{"JPG, JPEG and PNG. (MAX SIZE: 2MB)."}</span>
                                         )
                                     }
                                     onChange={(e) => validateFile(e)}

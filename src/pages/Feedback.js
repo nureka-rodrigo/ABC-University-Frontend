@@ -73,7 +73,7 @@ export default function Feedback() {
                 })
                 .then((response) => {
                     if (response.status === 200) {
-                        toast.success('Password updated successfully', {
+                        toast.success('Feedback sent successfully', {
                             ...ToastSettings
                         })
                         setIsLoading(false)
