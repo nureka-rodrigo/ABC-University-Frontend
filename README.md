@@ -1,4 +1,4 @@
-## abc-university-frontend
+# abc-university-frontend
 
 This project is a web application built using React.js.
 It's a student management system that allows students to view their profile,
