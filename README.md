@@ -43,4 +43,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-This project is licensed under the terms of the [MIT license](https://github.com/nureka-rodrigo/abc-university-frontend/blob/main/LICENSE).
+This project is licensed under the terms of the [MIT license](https://github.com/nureka-rodrigo/ABC-University-Frontend/blob/main/LICENSE).
