@@ -1,4 +1,4 @@
-# abc-university-frontend
+# ABC-University-Frontend
 
 This project is a web application built using React.js.
 It's a student management system that allows students to view their profile,
@@ -30,8 +30,8 @@ To set up and run this project locally,
 you'll need to have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
 Follow these steps:
 
-1. Clone the repository: `git clone https://github.com/nureka-rodrigo/abc-university-frontend.git`
-2. Navigate into the project directory: `cd abc-university-frontend`
+1. Clone the repository: `git clone https://github.com/nureka-rodrigo/ABC-University-Frontend.git`
+2. Navigate into the project directory: `cd ABC-University-Frontend`
 3. Install the dependencies: `npm install`
 4. Start the application: `npm start`
 
